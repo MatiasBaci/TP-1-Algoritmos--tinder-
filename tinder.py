@@ -32,9 +32,26 @@ def registro():
     diccionario_usuarios2[pseudonimo] = [contraseña, nombre, apellido, sexo, edad, ubicacion, intereses]
     return diccionario_usuarios2
 
-def nuevo_pseudonimo(dicc_usuarios):        ###se tiene que fijar que no este el pseudonimo ya en el diccionario mayor
-    pseudonimo = input("Ingrese su pseudonimo, compuesto unicamente de minusculas, numeros y guiones bajos\n")
-    while
+def nuevo_pseudonimo(dicc_usuarios):
+    enProceso = True
+    while enProceso:        ###para ver si el proceso de elegir pseudonimo esta terminado o en proceso
+        pseudonimo = input("Ingrese su pseudonimo, compuesto unicamente de minusculas, numeros y guiones bajos\nPseudonimo: ")
+        if pseudonimo in dicc_usuarios:
+            print("el pseudónimo elegido ya esta en uso. Por favor eliga otro")
+        elif not esValidoPseudonimo(pseudonimo):        #Entra a esta parte si el pseudonimo no es valido
+            print("El pseudónimo solo puede contener minusculas, números y guiones bajo '_'")
+        else:
+            enProceso = False
+    return pseudonimo
+
+
+def esValidoPseudonimo(string_de_caracteres):           #Chequea que el pseudonimo no contenga caracteres no permitidos
+    caracteres_permitidos = (*"abcdefghijklmnopqrstuvwxyz1234567890_",)         #Tupla conteniendo los carateres permitidos en forma empaquetada
+    tupla_del_string = (*string_de_caracteres,)         #Lo mismo que con la tupla 'caracteres_permitidos' pero con el pseudonimo
+    for caracter in tupla_del_string:
+        if caracter not in caracteres_permitidos:
+            return False
+    return True
 
 def password():
 
@@ -71,7 +88,7 @@ def salir():
 #Bloque principal
 
 
-print("Bienvenido a la version python de tinder! OwO")
+print("Bienvenide a la version python de tinder! >w< <3")
 opcion_usuario = 0
 while opcion_usuario == 0:       #ciclo que ejecuta la funcion adecuada segun la opcion elegida
     opcion_usuario = menu_principal()

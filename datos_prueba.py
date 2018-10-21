@@ -33,3 +33,11 @@ def cargar_datos_prueba():
     straizzo = ["contraseña", "Dire", "Straizzo", "hombre", 27, (, ), ["", "", "", ""]]
     diccionario = {"juan_perez": juan_perez, "giorno_giovanna": giorno_giovanna, "jotaro_kujo": jotaro_kujo, "lisa_lisa": lisa_lisa, "suzi_q": suzi_q, "joseph_joestar": joseph_joestar, "dio_brando": dio_brando, "erina_obacha": erina_obacha, "jane_doe": jane_doe, "john_doe": john_doe, "kakyoin": kakyoin, "straizzo": straizzo}
     return diccionario
+
+
+
+
+if __name__ == "__main__":
+    usuarios = cargar_datos_prueba():
+        for pseudonimo in usuarios:
+            print("{pseudonimo}\n{} {} {} {} {} {} {}".format(usuarios[pseudonimo][0],usuarios[pseudonimo][1],usuarios[pseudonimo][2],usuarios[pseudonimo][3],usuarios[pseudonimo][4],usuarios[pseudonimo][5],usuarios[pseudonimo][6]) )
