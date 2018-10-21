@@ -30,5 +30,6 @@ def cargar_datos_prueba():
     jane_doe = ["contraseña", "Jane", "Doe", "mujer", 25, (, ), ["asado", "musica", "green-day", "star-wars"]]
     john_doe = ["contraseña", "John", "Doe", "hombre", 25, (, ), ["bicicleta", "taekwondo", "buenos-aires", "basquet"]]
     kakyoin = ["contraseña", "Noriaki", "Kakyoin", "hombre", 18, (, ), ["chupetines", "cerezas", "esmeraldas", "verde", "lentes"]]
-    diccionario = {"juan_perez": juan_perez, "giorno_giovanna": giorno_giovanna, "jotaro_kujo": jotaro_kujo, "lisa_lisa": lisa_lisa, "suzi_q": suzi_q, "joseph_joestar": joseph_joestar, "dio_brando": dio_brando, "erina_obacha": erina_obacha, "jane_doe": jane_doe, "john_doe": john_doe, "kakyoin": kakyoin}
+    straizzo = ["contraseña", "Dire", "Straizzo", "hombre", 27, (, ), ["", "", "", ""]]
+    diccionario = {"juan_perez": juan_perez, "giorno_giovanna": giorno_giovanna, "jotaro_kujo": jotaro_kujo, "lisa_lisa": lisa_lisa, "suzi_q": suzi_q, "joseph_joestar": joseph_joestar, "dio_brando": dio_brando, "erina_obacha": erina_obacha, "jane_doe": jane_doe, "john_doe": john_doe, "kakyoin": kakyoin, "straizzo": straizzo}
     return diccionario
