@@ -18,10 +18,17 @@
 #   green-day, star-wars, nueva-york, fotografia, francia, asado, bicicleta, taekwondo,
 #   buenos-aires.
 
-Juan_Perez = ["1235JoJo", "Juan", "Perez", "hombre", 34, (1, 2), ["sushi", "roirros", "troirros"]]
-Giorno_Giovanna = ["contraseña", "Giorno", "Giovanna", "hombre", 18, ()]
+def cargar_datos_prueba():
+    juan_perez = ["1235JoJo", "Juan", "Perez", "hombre", 34, (1, 2), ["sushi", "roirros", "troirros"]]
+    giorno_giovanna = ["contraseña", "Giorno", "Giovanna", "hombre", 18, (0, 0), ["helado", "italia", "taxis", "robar"]]
+    jotaro_kujo = ["contraseña", "Jotaro", "Kujo", "hombre", 28, (0, 0), ["delfines", "fumar", "poker"]]
+    lisa_lisa = ["contraseña", "Lisa", "Lisa", "mujer", 36, (0, 0), ["baño-de-inmersion", "bufandas", "lentes"]]
+    suzi_q = ["contraseña", "", "", "", , (, ), ["fotografia", "japon", "bromas", ""]]
+    joseph_joestar = ["contraseña", "", "", "", , (, ), ["disfraces", "armas", "nueva-york", ""]]
+    dio_brando = ["contraseña", "", "", "", , (, ), ["sangre", "poder", "gatos", "relojes", "cuchillos"]]
+    erina_pendleton = ["contraseña", "", "", "", , (, ), ["medicina", "", "", ""]]
+    
 
+    diccionario = {"juan_perez": juan_perez, "giorno_giovanna": giorno_giovanna, "jotaro_kujo": jotaro_kujo, "lisa_lisa": lisa_lisa, "suzi_q": suzi_q, "joseph_joestar": joseph_joestar, "dio_brando": dio_brando, "erina_pendleton": erina_pendleton, , }
 
-
-
-Diccionario = {"Juan_Perez":Juan_Perez}
+    return diccionario
