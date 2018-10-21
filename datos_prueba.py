@@ -23,4 +23,4 @@ Juan_Perez = ["1235","Juan","Perez","hombre",34,(1,2),["sushi","roirros","troirr
 
 
 
-Diccionario = {"Juan _Perez":Juan_Perez}
+Diccionario = {"Juan_Perez":Juan_Perez}
