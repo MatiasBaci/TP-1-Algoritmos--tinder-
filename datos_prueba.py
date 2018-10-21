@@ -17,8 +17,8 @@
 #green-day, star-wars, nueva-york, fotografia, francia, asado, bicicleta, taekwondo,
 #buenos-aires.
 
-Juan_Perez = ["1235","Juan","Perez","hombre",34,(1,2),["sushi","roirros","troirros"]]
-
+Juan_Perez = ["1235JoJo", "Juan", "Perez", "hombre", 34, (1, 2), ["sushi", "roirros", "troirros"]]
+Giorno_Giovanna = ["contraseña", "Giorno", "Giovanna", "hombre", 18, ()]
 
 
 
