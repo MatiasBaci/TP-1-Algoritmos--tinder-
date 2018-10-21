@@ -1,5 +1,5 @@
 #Menu principal
-#import datos_prueba
+from datos_prueba import cargar_datos_prueba
 
 
 
@@ -16,8 +16,6 @@ menuPrincipal():
         user_input = input("entrada no válida. Por favor, elija una de las opciones indicadas:\n")
     return user_input
 
-opciones(opcion): #toma la opcion del usuario en forma de string
-    if opcion == "1":
         
 
 
@@ -27,4 +25,7 @@ opciones(opcion): #toma la opcion del usuario en forma de string
 print("bienvenido a la version python de tinder! OwO")
 
 opcion_usuario = menuPrincipal()
-opciones(opcion_usuario) #funcion que toma la opcion del usuario y llama a la funcion correspondiente a esa opcion
+if opcion_usuario == "1":
+    diccionario_usuarios = cargar_datos_prueba()
+elif opcion_usuario == "2":
+    
