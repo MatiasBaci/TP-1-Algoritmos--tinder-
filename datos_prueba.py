@@ -27,7 +27,7 @@ def cargar_datos_prueba():
     joseph_joestar = ["contraseña", "", "", "", , (, ), ["disfraces", "armas", "nueva-york", ""]]
     dio_brando = ["contraseña", "", "", "", , (, ), ["sangre", "poder", "gatos", "relojes", "cuchillos"]]
     erina_pendleton = ["contraseña", "", "", "", , (, ), ["medicina", "", "", ""]]
-    
+
 
     diccionario = {"juan_perez": juan_perez, "giorno_giovanna": giorno_giovanna, "jotaro_kujo": jotaro_kujo, "lisa_lisa": lisa_lisa, "suzi_q": suzi_q, "joseph_joestar": joseph_joestar, "dio_brando": dio_brando, "erina_pendleton": erina_pendleton, , }
 
