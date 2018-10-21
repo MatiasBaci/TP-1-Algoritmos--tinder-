@@ -68,7 +68,9 @@ def interests():
 
 
 
-def ingresar():
+def ingresar():                         ###no me parece bueno hacer esto con funciones. son muchas cosas que tiene que hacer que no tiene mucho sentido que 
+                                        ###este en una funcion en vez de el cuerpo del programa. sino es como que el programa entero es una funcion
+                                        
 
 
 
