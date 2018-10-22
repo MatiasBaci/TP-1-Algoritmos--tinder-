@@ -95,8 +95,7 @@ def sex():
     ##salir = False
     caracteres_permitidos = ("h", "m", "i", "hombre", "mujer", "indefinido")
     while not sexo_valido: ##or not salir:
-        ###sexo = input("Ingrese sexo\n'h' hombre\n'm' mujer\n'i' indefinido\nSexo:").lower()      #'s' salir
-        ###sexo = input("Ingrese sexo\n'h' hombre\n'm' mujer\n'i' indefinido\n's' salir\nSexo:").lower()                no se cual querias dejar. deje las dos y vos fijate cual era.
+        sexo = input("Ingrese sexo\n'h' hombre\n'm' mujer\n'i' indefinido\nSexo:").lower()      #'s' salir
         if sexo in caracteres_permitidos:
             sexo_valido = True
         else:
