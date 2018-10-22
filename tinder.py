@@ -144,10 +144,6 @@ def editar():        ###OPCIONAL
 
 
 
-def editar():
-
-
-
 
 def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en un diccionario
     print("sexo en el que esta interesade")
@@ -155,11 +151,26 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
     print("rango de edades en las que esta interesade")
     rango_edad = age()
     rango_distancia = float(input("rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros. el número puede ser decimal:\n"))
-    dicc = {pseudonimo:[sexo_buscar,rango_edad,rango_distancia]}
-    return dicc
+    lista = [pseudonimo,[sexo_buscar,rango_edad,rango_distancia]]
+    return lista
 
-def findMatch(dicc_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
-    
+def findMatch(dicc_usuarios,lista_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
+    info_usuario = dicc_usuarios.pop(lista_busqueda[0])     #quita al usuario en sesion del diccionario y devuelve su informacion a info_usuaario.
+    lista_busqueda.append(info_usuario)
+    dicc_matches = {}
+    for usuario in dicc_usuarios:
+        edad_min = lista_busqueda[1][1][0]
+        edad_max = lista_busqueda[1][1][1]
+        sexo_interesado = lista_busqueda[1][0]
+        distancia_al_usuario = geodesic(dicc_usuarios[usuario][5],info_usuario[5])
+        if (edad_min < dicc_usuarios[usuario][4] < edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[0][2]):
+            datos = dicc_usuarios.pop(usuario)
+            dicc_matches.update({usuario:datos})
+    return dicc_matches,lista_busqueda
+
+def porcentaje_match(dicc_matches,lista_busqueda):      ### debe mostrar los usarios matcehados y el porcentaje de match de acad uno.
+
+
 
 
 
@@ -175,6 +186,7 @@ while opcion_usuario == 0:       #ciclo que ejecuta la funcion adecuada segun la
     opcion_usuario = menu_principal()
     if opcion_usuario == "1":
         diccionario_usuarios_prueba = cargar_datos_prueba()        ###hay que hacer un append para un diccionario mayor, y no permitir que se cargue varias veces
+        diccionario_usuarios.update(diccionario_usuarios_prueba)
         print("Los datos han sido cargados")
         opcion_usuario = "0"
     elif opcion_usuario == "2":
@@ -185,7 +197,7 @@ while opcion_usuario == 0:       #ciclo que ejecuta la funcion adecuada segun la
         if not valido:
             opcion_usuario = menu_principal()
         else:
-            diccionario_busqueda = busqueda(pseudonimoIngresado)
+            lista_busqueda = busqueda(diccionario_usuarios,pseudonimoIngresado)
 
 
     elif opcion_usuario == "4":
