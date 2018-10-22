@@ -74,6 +74,7 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
                 i += 1
                 if santo_y_seña[i] not in tupla_mayusculas:
                     if santo_y_seña[i] not in tupla_minusculas:
+                        if santo_y_seña[i] not in tupla_numeros:                      ###es como 3D OOoo..ooOOoo..
                             valido = "No"
                             numero = False
                             print("Caracter(es) invalido(s)")
@@ -194,6 +195,7 @@ def ingresar(dicc):
     return None,False
 
     
+def editar():        ###OPCIONAL, NO HACER BAJO NINGUNA CIRCUNSTANCIA   -/- suena como un reto ¬.o
 
 
 
@@ -209,8 +211,10 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
     return lista
 
 def findMatch(dicc_usuarios,lista_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
+    info_usuario = dicc_usuarios.pop(lista_busqueda[0])     #quita al usuario en sesion del diccionario y devuelve su informacion (value correspondiente a esa key) a info_usuaario.
     lista_busqueda.append(info_usuario)
     dicc_matches = {}
+    for usuario in dicc_usuarios:           #por cada usuario en el diccionario se fija si hacen match. si hay, mete a ese usuario y sus datos (values) en otro diccionario 'dicc_matches'
         edad_min = lista_busqueda[1][1][0]
         edad_max = lista_busqueda[1][1][1]
         sexo_interesado = lista_busqueda[1][0]
@@ -218,7 +222,9 @@ def findMatch(dicc_usuarios,lista_busqueda):       ###le das el diccionario con 
         if (edad_min < dicc_usuarios[usuario][4] < edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[0][2]):
             datos = dicc_usuarios.pop(usuario)
             dicc_matches.update({usuario:datos})
+    return dicc_matches,lista_busqueda          ###lista_busqueda ahora tambien tiene los datos de su usuario. no se si vale la pena hacer esto. quizas lo cambie. esta asi porque va a usar info agregada en la funcion de abajo
 
+def porcentaje_match(dicc_matches,lista_busqueda):      ### debe mostrar los usarios matcehados y el porcentaje de match de cada uno.
 
 
 
