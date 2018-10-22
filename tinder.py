@@ -5,6 +5,7 @@
 
 
 from datos_prueba import cargar_datos_prueba
+from geopy.distance import geodesic
 
 
 def menu_principal():
