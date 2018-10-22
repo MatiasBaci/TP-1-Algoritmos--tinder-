@@ -95,7 +95,8 @@ def sex():
     ##salir = False
     caracteres_permitidos = ("h", "m", "i", "hombre", "mujer", "indefinido")
     while not sexo_valido: ##or not salir:
-        sexo = input("Ingrese sexo\n'h' hombre\n'm' mujer\n'i' indefinido\nSexo:").lower()      #'s' salir
+        ###sexo = input("Ingrese sexo\n'h' hombre\n'm' mujer\n'i' indefinido\nSexo:").lower()      #'s' salir
+        ###sexo = input("Ingrese sexo\n'h' hombre\n'm' mujer\n'i' indefinido\n's' salir\nSexo:").lower()                no se cual querias dejar. deje las dos y vos fijate cual era.
         if sexo in caracteres_permitidos:
             sexo_valido = True
         else:
@@ -161,9 +162,6 @@ def es_valido_interes(interes, intereses):
     if interes in intereses:    #se fija que no este repetido
         return False
     return True
-
-
-
 
 
 def ingresar(dicc):
