@@ -55,16 +55,47 @@ def esValidoPseudonimo(string_de_caracteres):           #Chequea que el pseudoni
 
 
 
-def password():
+def password():                     ###perdon si es confuso, ni yo la entiendo
+    mayuscula = False
+    tupla_mayusculas = (*"ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",)
+    minuscula = False
+    tupla_minusculas = (*"abcdefghijklmnñopqrstuvwxyz",)
+    numero = False
+    tupla_numeros = (*"0123456789",)
+    while not mayuscula or not minuscula or not numero:
+        mayuscula = False
+        minuscula = False
+        numero = False
+        santo_y_seña = input("Ingrese contraseña de al menos 5 caracteres con numeros, minusculas y mayusculas\n Contraseña: ")
+        if len(santo_y_seña) >= 5:
+            valido = "No se"
+            i = -1
+            while valido == "No se":
+                i += 1
+                if santo_y_seña[i] not in tupla_mayusculas:
+                    if santo_y_seña[i] not in tupla_minusculas:
+                        if santo_y_seña[i] not in tupla_numeros:
+                            valido = "No"
+                            numero = False
+                            print("Caracter(es) invalido(s)")
+                        else:
+                            numero = True
+                    else:
+                        minuscula = True
+                else:
+                    mayuscula = True
+                if valido == "No se" and len(santo_y_seña) == i:
+                    valido = "Si"
+    return santo_y_seña
 
 
 
-def sex():                      ###dejar estas funciones menores para el final
+def sex():
     sexo_valido = False
     ##salir = False
     caracteres_permitidos = ("h", "m", "i", "hombre", "mujer", "indefinido")
     while not sexo_valido: ##or not salir:
-        sexo = input("Ingrese sexo\n'h' hombre\n'm' mujer\n'i' indefinido\n's' salir\nSexo:").lower()
+        sexo = input("Ingrese sexo\n'h' hombre\n'm' mujer\n'i' indefinido\nSexo:").lower()      #'s' salir
         if sexo in caracteres_permitidos:
             sexo_valido = True
         else:
@@ -80,8 +111,32 @@ def sex():                      ###dejar estas funciones menores para el final
 
 
 def age():
+    invalido = True
+    while invalido:
+        invalido = False
+        edad = input("Ingrese su edad")
+        if len(edad) > 2:       ###es para que la funcion no compare caracter por caracter si es que son muchos, porque ya es invalido
+            invalido = True
+        else:
+            for caracter in edad:
+                if caracter not in (*"0123456789",):
+                    invalido = True
+        if not invalido:
+            if int(edad) > 99 or int(edad) < 18:
+                invalido = True
+        if invalido:
+            print("Edad invalida. Debe ser un numero entre 18 y 99.")
+    return int(edad)
+
+
+
+
 
 def location():
+
+
+
+
 
 def interests():
     otro_mas = True
@@ -140,16 +195,16 @@ def ingresar(dicc):
     return None,False
 
     
-def editar():        ###OPCIONAL
+def editar():        ###OPCIONAL, NO HACER BAJO NINGUNA CIRCUNSTANCIA
 
 
 
 
 
 def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en un diccionario
-    print("sexo en el que esta interesade")
+    print("Sexo en el que esta interesade")
     sexo_buscar = sex()
-    print("rango de edades en las que esta interesade")
+    print("Rango de edades en las que esta interesade")
     rango_edad = age()
     rango_distancia = float(input("rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros. el número puede ser decimal:\n"))
     lista = [pseudonimo,[sexo_buscar,rango_edad,rango_distancia]]
