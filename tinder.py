@@ -143,7 +143,8 @@ def location():
             print("oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
         else:
             lon_valido = True
-    return (latitud, longitud)
+    ubicacion = (latitud, longitud)
+    return ubicacion
 
 
 def interests():
@@ -238,8 +239,7 @@ def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los us
         round(porcentaje)
         nombre = dicc_matches[match][1]
         apellido = dicc_matches[match][2]
-        print("Match!!! OwO <3 {nombre} {apellido} y vos tienen un {porcentaje}% de intereses en comun.")   ###si falla poner .format
-        ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
+        print("Match!!! OwO <3 {nombre} {apellido} y vos tienen un {porcentaje}% de intereses en comun.")  ###si falla poner .format        ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
     print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
     print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
 
@@ -278,4 +278,5 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
         opcion_usuario = "0"
     elif opcion_usuario == "5":     ###pongo elif por las dudas, cambiar luego de testear mucho
         print("Chau hermose <3")
+        time.sleep(3)
         exit()
