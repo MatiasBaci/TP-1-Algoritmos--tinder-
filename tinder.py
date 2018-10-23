@@ -16,16 +16,12 @@ def menu_principal():
     user_input = input("Por favor elija una de las opciones para proseguir\n>")  #guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
     while user_input not in (*"12345",):     #tupla conteniendo las opciones empaquetadas. verifica que el usuario no ingrese entradas no permitidas
         user_input = input("Entrada no válida. Por favor, elija una de las opciones indicadas\n>")
-        time.sleep(2)
     return user_input
 
 
-def registro():
+def registro(diccionario_usuarios):
     nombre = input("Ingrese su nombre\n>")
     apellido = input("Ingrese su apellido\n>")
-def registro(diccionario_usuarios):
-    nombre = input("Ingrese su nombre\n")
-    apellido = input("Ingrese su apellido\n")
     pseudonimo = nuevo_pseudonimo(diccionario_usuarios)
     contraseña = password()
     sexo = sex()
@@ -140,18 +136,18 @@ def location():
     lat_valido = False
     while not lat_valido:
         try:
-            latitud = float(input("ingrese su latitud\n>").replace(",", "."))
+            latitud = float(input("Ingrese su latitud\n>").replace(",", "."))
         except TypeError:
-            print("oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
+            print("Oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
             time.sleep(2)
         else:
             lat_valido = True
     lon_valido = False
     while not lon_valido:
         try:
-            longitud = float(input("ingrese su longitud\n>"))
+            longitud = float(input("Ingrese su longitud\n>"))
         except TypeError:
-            print("oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
+            print("Oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
             time.sleep(2)
         else:
             lon_valido = True
@@ -163,7 +159,7 @@ def interests():
     otro_mas = True
     intereses = []
     while otro_mas:
-        interes = input("Ingrese un interes, o 'salir'\n").lower().strip()
+        interes = input("Ingrese un interes, o 'salir'\n>").lower().strip()
         interes = interes.replace(" ", "-")
         if interes != "salir":
             if es_valido_interes(interes, intereses):
@@ -281,10 +277,10 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
             diccionario_usuarios.update(diccionario_usuarios_prueba)
             datos_ya_cargados = True
             print("Los datos han sido cargados")
-            time.sleep(3)
+            time.sleep(1)
         else:
             print("No se cargaron datos porque ya habian sido cargados.")
-            time.sleep(3)
+            time.sleep(2)
         opcion_usuario = "0"
     elif opcion_usuario == "2":
         diccionario_usuarios.update(registro(diccionario_usuarios))

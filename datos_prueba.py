@@ -23,7 +23,7 @@ def cargar_datos_prueba():
     giorno_giovanna = ["contraseña", "Giorno", "Giovanna", "hombre", 18, (0, 0), ["helado", "italia", "taxis", "robar", "oro", "animales", "plantas"]]
     jotaro_kujo = ["contraseña", "Jotaro", "Kujo", "hombre", 28, (0, 0), ["delfines", "fumar", "poker"]]
     lisa_lisa = ["contraseña", "Lisa", "Lisa", "mujer", 36, (0, 0), ["baño-de-inmersion", "bufandas", "lentes"]]
-    suzi_q = ["contraseña", "Suzi", "Q", "mujer", 50, (0, 0), ["fotografia", "japon", "bromas", ""]]
+    suzi_q = ["contraseña", "Suzi", "Q", "mujer", 50, (0, 0), ["fotografia", "japon", "bromas"]]
     joseph_joestar = ["contraseña", "Joseph", "Joestar", "hombre", 50, (50, 10), ["disfraces", "armas", "nueva-york"]]
     dio_brando = ["contraseña", "Dio", "Brando", "hombre", 99, (0, 0), ["sangre", "poder", "gatos", "relojes", "cuchillos"]]
     erina_obacha = ["contraseña", "Erina", "Pendleton", "mujer", 18, (10, 6), ["medicina", "barro"]]
