@@ -2,7 +2,7 @@
 ###uso 1 numeral (#) para cuando el mensaje es para los profes
 
 from datos_prueba import cargar_datos_prueba
-#from geopy.distance import geodesic
+from geopy.distance import geodesic
 import time
 
 
@@ -13,15 +13,16 @@ def menu_principal():
     print("3: Ingresar al sistema")
     print("4: Editar usuario existente")
     print("5: Salir")
-    user_input = input("Por favor elija una de las opciones para proseguir:\n")  #guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
+    user_input = input("Por favor elija una de las opciones para proseguir\n>")  #guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
     while user_input not in (*"12345",):     #tupla conteniendo las opciones empaquetadas. verifica que el usuario no ingrese entradas no permitidas
-        user_input = input("Entrada no válida. Por favor, elija una de las opciones indicadas:\n")
+        user_input = input("Entrada no válida. Por favor, elija una de las opciones indicadas\n>")
+        time.sleep(2)
     return user_input
 
 
 def registro():
-    nombre = input("Ingrese su nombre\n")
-    apellido = input("Ingrese su apellido\n")
+    nombre = input("Ingrese su nombre\n>")
+    apellido = input("Ingrese su apellido\n>")
     pseudonimo = nuevo_pseudonimo(diccionario_usuarios)
     contraseña = password()
     sexo = sex()
@@ -35,11 +36,13 @@ def registro():
 def nuevo_pseudonimo(dicc_usuarios):
     enProceso = True
     while enProceso:        ###para ver si el proceso de elegir pseudonimo esta terminado o en proceso
-        pseudonimo = input("Ingrese su pseudonimo, compuesto unicamente de minusculas, numeros y guiones bajos\nPseudonimo: ")
+        pseudonimo = input("Ingrese su pseudonimo, compuesto unicamente de minusculas, numeros y guiones bajos\n>")
         if pseudonimo in dicc_usuarios:
             print("El pseudónimo elegido ya esta en uso. Por favor eliga otro")
+            time.sleep(2)
         elif not esValidoPseudonimo(pseudonimo):        #Entra a esta parte si el pseudonimo no es valido
             print("El pseudónimo solo puede contener minusculas, números y guiones bajos '_'")
+            time.sleep(2)
         else:
             enProceso = False
     return pseudonimo
@@ -64,7 +67,7 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
         mayuscula = False
         minuscula = False
         numero = False
-        santo_y_seña = str(input("Ingrese contraseña de al menos 5 caracteres con numeros, minusculas y mayusculas\n"))
+        santo_y_seña = str(input("Ingrese contraseña de al menos 5 caracteres con numeros, minusculas y mayusculas, sin espacios\n>"))
         if len(santo_y_seña) >= 5:
             valido = "No se"
             i = -1
@@ -76,6 +79,7 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
                             valido = "No"
                             numero = False
                             print("Caracter(es) invalido(s)")
+                            time.sleep(2)
                         else:
                             numero = True
                     else:
@@ -93,7 +97,7 @@ def sex():
     ##salir = False
     caracteres_permitidos = ("h", "m", "i", "hombre", "mujer", "indefinido")
     while not sexo_valido: ##or not salir:
-        sexo = input("Ingrese sexo\n'h' hombre\n'm' mujer\n'i' indefinido\nSexo:").lower()      #'s' salir
+        sexo = input("Ingrese sexo\n'h' hombre\n'm' mujer\n'i' indefinido\n>").lower()      #'s' salir
         if sexo in caracteres_permitidos:
             sexo_valido = True
         else:
@@ -113,7 +117,7 @@ def age():
     invalido = True
     while invalido:
         invalido = False
-        edad = input("Ingrese su edad")
+        edad = input("Ingrese su edad\n>")
         if len(edad) > 2:       ###es para que la funcion no compare caracter por caracter si es que son muchos, porque ya es invalido
             invalido = True
         else:
@@ -125,6 +129,7 @@ def age():
                 invalido = True
         if invalido:
             print("Edad invalida. Debe ser un numero entre 18 y 99.")
+            time.sleep(2)
     return int(edad)
 
 
@@ -132,17 +137,19 @@ def location():
     lat_valido = False
     while not lat_valido:
         try:
-            latitud = float(input("ingrese su latitud").replace(",", "."))
+            latitud = float(input("ingrese su latitud\n>").replace(",", "."))
         except TypeError:
             print("oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
+            time.sleep(2)
         else:
             lat_valido = True
     lon_valido = False
     while not lon_valido:
         try:
-            longitud = float(input("ingrese su longitud"))
+            longitud = float(input("ingrese su longitud\n>"))
         except TypeError:
             print("oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
+            time.sleep(2)
         else:
             lon_valido = True
     ubicacion = (latitud, longitud)
@@ -159,9 +166,12 @@ def interests():
             if es_valido_interes(interes, intereses):
                 intereses.append(interes)
                 print("{} ha sido agregado a sus intereses".format(interes))
+                time.sleep(1)
             else:
                 print("Caracteres invalidos, o el interes ya se encuentra en su lista de intereses")
-        else: otro_mas = False
+                time.sleep(2)
+        else:
+            otro_mas = False
     return intereses
 
 
@@ -180,22 +190,24 @@ def ingresar(dicc):
     salir = False
     respuesta = "1"
     while not usuarioValido or not salir:
-        pseudonimo = input("ingrese su nombre de usuario (pseudonimo)\nusuario: ")
+        pseudonimo = input("Ingrese su nombre de usuario (pseudonimo)\n>")
         usuarioValido = True
         if pseudonimo not in dicc:
-            print("usuario equivocado. Inténtelo de nuevo")
+            print("Usuario equivocado. Inténtelo de nuevo")
+            time.sleep(1)
             usuarioValido = False
-            respuesta = input("desea continuar? (0 para salir, cualquier cosa para continuar\n")
+            respuesta = input("Desea continuar? (0 para salir, cualquier cosa para continuar\n>")
         if respuesta == "0":
             salir = True
     contraseñaValida = False
     while not contraseñaValida or not salir:
-        contraseña = input("ingrese su contraseña\ncontraseña: ")
+        contraseña = input("Ingrese su contraseña\n>")
         if contraseña == dicc[pseudonimo][0]:
             contraseñaValida = True
         else:
-            print("contraseña inválida")
-            respuesta = input("desea continuar? (0 para salir, cualquier cosa para continuar\n")
+            print("Contraseña inválida")
+            time.sleep(1)
+            respuesta = input("Desea continuar? (0 para salir, cualquier cosa para continuar\n>")
         if respuesta == "0":
             salir = True
     if usuarioValido and contraseñaValida:
@@ -205,10 +217,12 @@ def ingresar(dicc):
 
 def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en un diccionario
     print("Sexo en el que esta interesade")
+    time.sleep(1)
     sexo_buscar = sex()
     print("Rango de edades en las que esta interesade")
+    time.sleep(2)
     rango_edad = age()
-    rango_distancia = float(input("Rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros. El número puede ser decimal:\n"))
+    rango_distancia = float(input("Rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros, puede ser decimal\n>"))
     lista = [pseudonimo, [sexo_buscar, rango_edad, rango_distancia]]
     return lista
 
