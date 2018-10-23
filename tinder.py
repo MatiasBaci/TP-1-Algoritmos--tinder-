@@ -2,7 +2,7 @@
 ###uso 1 numeral (#) para cuando el mensaje es para los profes
 
 from datos_prueba import cargar_datos_prueba
-from geopy.distance import geodesic
+#from geopy.distance import geodesic
 
 
 def menu_principal():
@@ -274,7 +274,7 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
         if not valido:
             opcion_usuario = menu_principal()
         else:
-            lista_busqueda = busqueda(diccionario_usuarios, pseudonimoIngresado)
+            lista_busqueda = busqueda(pseudonimoIngresado)
     elif opcion_usuario == "4":
         print("Editar? No hay presupuesto para tantas funcionalidades.")
         opcion_usuario = "0"
