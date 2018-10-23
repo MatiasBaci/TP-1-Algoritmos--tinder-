@@ -125,7 +125,7 @@ def age():
     return int(edad)
 
 
-+def location():
+def location():
     lat_valido = False
     while not lat_valido:
         try:
