@@ -2,7 +2,7 @@
 ###uso 1 numeral (#) para cuando el mensaje es para los profes
 
 from datos_prueba import cargar_datos_prueba
-#from geopy.distance import geodesic
+from geopy.distance import geodesic
 import time
 
 
