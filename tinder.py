@@ -2,7 +2,7 @@
 ###uso 1 numeral (#) para cuando el mensaje es para los profes
 
 from datos_prueba import cargar_datos_prueba
-from geopy.distance import geodesic
+#from geopy.distance import geodesic
 import time
 
 
@@ -192,7 +192,7 @@ def ingresar(dicc):
     usuarioValido = False
     salir = False
     respuesta = "1"
-    while not usuarioValido or not salir:
+    while not usuarioValido and not salir:
         pseudonimo = input("Ingrese su nombre de usuario (pseudonimo)\n>")
         usuarioValido = True
         if pseudonimo not in dicc:
@@ -203,7 +203,7 @@ def ingresar(dicc):
         if respuesta == "0":
             salir = True
     contraseñaValida = False
-    while not contraseñaValida or not salir:
+    while not contraseñaValida and not salir:
         contraseña = input("Ingrese su contraseña\n>")
         if contraseña == dicc[pseudonimo][0]:
             contraseñaValida = True
