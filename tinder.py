@@ -291,7 +291,7 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
     elif opcion_usuario == "3":
         pseudonimoIngresado, valido = ingresar(diccionario_usuarios)
         if not valido:
-            opcion_usuario = menu_principal()
+            opcion_usuario = "0"
         else:
             lista_busqueda = busqueda(diccionario_usuarios)
             lista_busqueda = busqueda(pseudonimoIngresado)
