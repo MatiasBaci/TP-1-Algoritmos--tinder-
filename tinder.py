@@ -3,10 +3,11 @@
 
 from datos_prueba import cargar_datos_prueba
 #from geopy.distance import geodesic
+import time
 
 
 def menu_principal():
-    print("MENU PRINCIPAL\n")
+    print("\n\nMENU PRINCIPAL\n")
     print("1: Cargar conjunto prueba")
     print("2: Registrarse en el sistema")
     print("3: Ingresar al sistema")
@@ -97,6 +98,7 @@ def sex():
             sexo_valido = True
         else:
             print("Invalido")
+            time.sleep(2)
     if sexo not in ("hombre", "mujer", "indefinido"):
         if sexo == "h":
             sexo = "hombre"
@@ -151,9 +153,9 @@ def interests():
     otro_mas = True
     intereses = []
     while otro_mas:
-        interes = input("Ingrese un interes, o 'exit'\n").lower().strip()
+        interes = input("Ingrese un interes, o 'salir'\n").lower().strip()
         interes = interes.replace(" ", "-")
-        if interes != "exit":
+        if interes != "salir":
             if es_valido_interes(interes, intereses):
                 intereses.append(interes)
                 print("{} ha sido agregado a sus intereses".format(interes))
@@ -240,8 +242,11 @@ def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los us
         nombre = dicc_matches[match][1]
         apellido = dicc_matches[match][2]
         print("Match!!! OwO <3 {nombre} {apellido} y vos tienen un {porcentaje}% de intereses en comun.")  ###si falla poner .format        ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
+        time.wait(1)
     print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
+    time.wait(5)
     print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
+    time.wait(5)
 
 
 #Bloque principal
@@ -260,8 +265,10 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
             diccionario_usuarios.update(diccionario_usuarios_prueba)
             datos_ya_cargados = True
             print("Los datos han sido cargados")
+            time.sleep(3)
         else:
             print("No se cargaron datos porque ya habian sido cargados.")
+            time.sleep(3)
         opcion_usuario = "0"
     elif opcion_usuario == "2":
         usuario_nuevo = registro()
@@ -275,6 +282,7 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
             lista_busqueda = busqueda(pseudonimoIngresado)
     elif opcion_usuario == "4":
         print("Editar? No hay presupuesto para tantas funcionalidades.")
+        time.sleep(3)
         opcion_usuario = "0"
     elif opcion_usuario == "5":     ###pongo elif por las dudas, cambiar luego de testear mucho
         print("Chau hermose <3")
