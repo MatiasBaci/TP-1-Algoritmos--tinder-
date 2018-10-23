@@ -1,12 +1,8 @@
 ###uso 3 numeral (###) para cuando el mensaje es para nosotros
 ###uso 1 numeral (#) para cuando el mensaje es para los profes
 
-###lo mejor seria priorizar las funciones importantes como registro, ingresar, editar, etc. y dejar para lo ultimo las petes como sex, age, etc.
-
-
 from datos_prueba import cargar_datos_prueba
 from geopy.distance import geodesic
-
 
 def menu_principal():
     print("MENU PRINCIPAL\n")
@@ -20,7 +16,6 @@ def menu_principal():
         user_input = input("Entrada no válida. Por favor, elija una de las opciones indicadas:\n")
     return user_input
 
-        
 def registro():
     nombre = input("Ingrese su nombre\n")
     apellido = input("Ingrese su apellido\n")
@@ -45,15 +40,12 @@ def nuevo_pseudonimo(dicc_usuarios):
             enProceso = False
     return pseudonimo
 
-
 def esValidoPseudonimo(string_de_caracteres):           #Chequea que el pseudonimo no contenga caracteres no permitidos
     caracteres_permitidos = (*"abcdefghijklmnopqrstuvwxyz1234567890_",)         #Tupla conteniendo los carateres permitidos en forma empaquetada
     for caracter in string_de_caracteres:
         if caracter not in caracteres_permitidos:
             return False
     return True
-
-
 
 def password():                     ###perdon si es confuso, ni yo la entiendo
     mayuscula = False
@@ -74,7 +66,7 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
                 i += 1
                 if santo_y_seña[i] not in tupla_mayusculas:
                     if santo_y_seña[i] not in tupla_minusculas:
-                        if santo_y_seña[i] not in tupla_numeros:                      ###es como 3D OOoo..ooOOoo..
+                        if santo_y_seña[i] not in tupla_numeros:                      ###es como 3D OOoo..ooOOoo.. whoa
                             valido = "No"
                             numero = False
                             print("Caracter(es) invalido(s)")
@@ -87,8 +79,6 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
                 if valido == "No se" and len(santo_y_seña) == i:
                     valido = "Si"
     return santo_y_seña
-
-
 
 def sex():
     sexo_valido = False
@@ -109,7 +99,6 @@ def sex():
             sexo = "indefinido"
     return sexo
 
-
 def age():
     invalido = True
     while invalido:
@@ -128,15 +117,28 @@ def age():
             print("Edad invalida. Debe ser un numero entre 18 y 99.")
     return int(edad)
 
-
-
-
-
-def location():
-
-
-
-
+def location():         #pregunta su ubicacion al ususario
+    valido = False
+    while not valido:
+        valido = True
+        latitud = input("Ingrese su latitud actual: ").replace(",", ".")
+        try:
+            float(latitud)
+        except Exception:
+            print("Latitud no valida")
+            valido = False
+        if valido:
+            longitud = input("Ingrese su longitud actual: ").replace(",", ".")
+            try:
+                float(longitud)
+            except Exception:
+                print("Longitud no valida")
+                valido = False
+        if valido:
+            latitud = float(latitud)
+            longitud = float(longitud)
+    ubicacion = (latitud, longitud)
+    return ubicacion
 
 def interests():
     otro_mas = True
@@ -161,7 +163,6 @@ def es_valido_interes(interes, intereses):
     if interes in intereses:    #se fija que no este repetido
         return False
     return True
-
 
 def ingresar(dicc):
     usuarioValido = False
@@ -189,25 +190,20 @@ def ingresar(dicc):
             salir = True
     if usuarioValido and contraseñaValida:
         return pseudonimo,True
-    return None,False
+    return None, False
 
-    
 def editar():        ###OPCIONAL, NO HACER BAJO NINGUNA CIRCUNSTANCIA   -/- suena como un reto ¬.o
-
-
-
-
 
 def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en un diccionario
     print("Sexo en el que esta interesade")
     sexo_buscar = sex()
     print("Rango de edades en las que esta interesade")
     rango_edad = age()
-    rango_distancia = float(input("rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros. el número puede ser decimal:\n"))
-    lista = [pseudonimo,[sexo_buscar,rango_edad,rango_distancia]]
+    rango_distancia = float(input("Rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros. El número puede ser decimal:\n"))
+    lista = [pseudonimo, [sexo_buscar, rango_edad, rango_distancia]]
     return lista
 
-def findMatch(dicc_usuarios,lista_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
+def findMatch(dicc_usuarios, lista_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
     info_usuario = dicc_usuarios.pop(lista_busqueda[0])     #quita al usuario en sesion del diccionario y devuelve su informacion (value correspondiente a esa key) a info_usuaario.
     lista_busqueda.append(info_usuario)
     dicc_matches = {}
@@ -215,14 +211,29 @@ def findMatch(dicc_usuarios,lista_busqueda):       ###le das el diccionario con 
         edad_min = lista_busqueda[1][1][0]
         edad_max = lista_busqueda[1][1][1]
         sexo_interesado = lista_busqueda[1][0]
-        distancia_al_usuario = geodesic(dicc_usuarios[usuario][5],info_usuario[5])
-        if (edad_min < dicc_usuarios[usuario][4] < edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[0][2]):
+        distancia_al_usuario = geodesic(dicc_usuarios[usuario][5], info_usuario[5])
+        if (edad_min <= dicc_usuarios[usuario][4] <= edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[0][2]):
             datos = dicc_usuarios.pop(usuario)
             dicc_matches.update({usuario:datos})
-    return dicc_matches,lista_busqueda          ###lista_busqueda ahora tambien tiene los datos de su usuario. no se si vale la pena hacer esto. quizas lo cambie. esta asi porque va a usar info agregada en la funcion de abajo
+    return dicc_matches, lista_busqueda          ###lista_busqueda ahora tambien tiene los datos de su usuario. no se si vale la pena hacer esto. quizas lo cambie. esta asi porque va a usar info agregada en la funcion de abajo
 
-def porcentaje_match(dicc_matches,lista_busqueda):      ### debe mostrar los usarios matcehados y el porcentaje de match de cada uno.
-
+def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los usarios matcehados y el porcentaje de match de cada uno.
+    for match in dicc_matches:
+        intereses_match = dicc_matches[match][-1]
+        intereses_usuario = lista_busqueda[-1]
+        total = len(intereses_match) + len(intereses_usuario)
+        comun = 0
+        for interest in intereses_usuario:      ###se fija si cada interes del usuario esta en los intereses del match
+            if interest in intereses_match:
+                comun += 1
+        porcentaje = 100 * 2 / total
+        round(porcentaje)
+        nombre = dicc_matches[match][1]
+        apellido = dicc_matches[match][2]
+        print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))
+        ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
+    print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
+    print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
 
 
 
@@ -234,24 +245,30 @@ def porcentaje_match(dicc_matches,lista_busqueda):      ### debe mostrar los usa
 print("Bienvenide a la version python de tinder! >w< <3")
 diccionario_usuarios = {}           ###aca van a ir todos los usuarios. los cargados y los nuevos      
 diccionario_usuarios_nuevos = {}    ###aca solo van a estar los usuarios nuevos
-opcion_usuario = 0
-while opcion_usuario == 0:       #ciclo que ejecuta la funcion adecuada segun la opcion elegida
+opcion_usuario = "0"
+datos_ya_cargados = False
+while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun la opcion elegida
     opcion_usuario = menu_principal()
-    if opcion_usuario == "1":
-        diccionario_usuarios_prueba = cargar_datos_prueba()        ###hay que hacer un append para un diccionario mayor, y no permitir que se cargue varias veces
-        diccionario_usuarios.update(diccionario_usuarios_prueba)
-        print("Los datos han sido cargados")
+    if opcion_usuario == "1":       #carga los datos del otro archivo si es que no se hizo antes
+        if not datos_ya_cargados:
+            diccionario_usuarios_prueba = cargar_datos_prueba()
+            diccionario_usuarios.update(diccionario_usuarios_prueba)
+            datos_ya_cargados = True
+            print("Los datos han sido cargados")
+        else:
+            print("No se cargaron datos porque ya habian sido cargados.")
         opcion_usuario = "0"
     elif opcion_usuario == "2":
         usuario_nuevo = registro()
         diccionario_usuarios_nuevos.update(usuario_nuevo)
     elif opcion_usuario == "3":
-        pseudonimoIngresado,valido = ingresar(diccionario_usuarios)
+        pseudonimoIngresado, valido = ingresar(diccionario_usuarios)
         if not valido:
             opcion_usuario = menu_principal()
         else:
-            lista_busqueda = busqueda(diccionario_usuarios,pseudonimoIngresado)
+            lista_busqueda = busqueda(diccionario_usuarios, pseudonimoIngresado)
     elif opcion_usuario == "4":
-        editar()
+        print("Editar? No hay presupuesto para tantas funcionalidades.")
+        opcion_usuario = "0"
     elif opcion_usuario == "5":     ###pongo elif por las dudas, cambiar luego de testear mucho
         exit()
