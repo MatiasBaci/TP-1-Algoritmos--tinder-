@@ -2,7 +2,7 @@
 ###uso 1 numeral (#) para cuando el mensaje es para los profes
 
 from datos_prueba import cargar_datos_prueba
-from geopy.distance import geodesic
+#from geopy.distance import geodesic
 
 
 def menu_principal():
@@ -125,28 +125,30 @@ def age():
     return int(edad)
 
 
-def location():         #pregunta su ubicacion al ususario
-    valido = False
-    while not valido:
-        valido = True
-        latitud = input("Ingrese su latitud actual: ").replace(",", ".")
+def location():
+    lat_valido = False
+    while not lat_valido:
         try:
-            float(latitud)
-        except Exception:
-            print("Latitud no valida")
-            valido = False
-        if valido:
-            longitud = input("Ingrese su longitud actual: ").replace(",", ".")
-            try:
-                float(longitud)
-            except Exception:
-                print("Longitud no valida")
-                valido = False
-        if valido:
-            latitud = float(latitud)
-            longitud = float(longitud)
-    ubicacion = (latitud, longitud)
-    return ubicacion
+            latitud = float(input("ingrese su latitud").replace(",","."))
+        except TypeError:
+            print("oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
+            latitud = -1
+        if latitud < 0:
+            print("intentelo otra vez")
+        else:
+            lat_valido = True
+    lon_valido = False
+    while not lon_valido:
+        try:
+            longitud = float(input("ingrese su longitud"))
+        except TypeError:
+            print("oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
+            longitud = -1
+        if longitud < 0:
+            print("intentelo otra vez")
+        else:
+            longitud = True
+    return (latitud,longitud)
 
 
 def interests():
@@ -275,6 +277,7 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
             opcion_usuario = menu_principal()
         else:
             lista_busqueda = busqueda(diccionario_usuarios)
+            lista_busqueda = busqueda(pseudonimoIngresado)
     elif opcion_usuario == "4":
         print("Editar? No hay presupuesto para tantas funcionalidades.")
         opcion_usuario = "0"
