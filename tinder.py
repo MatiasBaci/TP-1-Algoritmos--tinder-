@@ -21,7 +21,7 @@ def menu_principal():
 def registro():
     nombre = input("Ingrese su nombre\n")
     apellido = input("Ingrese su apellido\n")
-    pseudonimo = nuevo_pseudonimo()
+    pseudonimo = nuevo_pseudonimo(diccionario_usuarios)
     contraseña = password()
     sexo = sex()
     edad = age()
@@ -63,7 +63,7 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
         mayuscula = False
         minuscula = False
         numero = False
-        santo_y_seña = input("Ingrese contraseña de al menos 5 caracteres con numeros, minusculas y mayusculas\n Contraseña: ")
+        santo_y_seña = input("Ingrese contraseña de al menos 5 caracteres con numeros, minusculas y mayusculas\nContraseña: ")
         if len(santo_y_seña) >= 5:
             valido = "No se"
             i = -1

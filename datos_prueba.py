@@ -23,21 +23,19 @@ def cargar_datos_prueba():
     giorno_giovanna = ["contraseña", "Giorno", "Giovanna", "hombre", 18, (0, 0), ["helado", "italia", "taxis", "robar", "oro", "animales", "plantas"]]
     jotaro_kujo = ["contraseña", "Jotaro", "Kujo", "hombre", 28, (0, 0), ["delfines", "fumar", "poker"]]
     lisa_lisa = ["contraseña", "Lisa", "Lisa", "mujer", 36, (0, 0), ["baño-de-inmersion", "bufandas", "lentes"]]
-    suzi_q = ["contraseña", "Suzi", "Q", "mujer", 50, (, ), ["fotografia", "japon", "bromas", ""]]
-    joseph_joestar = ["contraseña", "Joseph", "Joestar", "hombre", 50, (, ), ["disfraces", "armas", "nueva-york", ""]]
-    dio_brando = ["contraseña", "Dio", "Brando", "hombre", 99, (, ), ["sangre", "poder", "gatos", "relojes", "cuchillos"]]
-    erina_obacha = ["contraseña", "Erina", "Pendleton", "mujer", 18, (, ), ["medicina", "", "", ""]]
-    jane_doe = ["contraseña", "Jane", "Doe", "mujer", 25, (, ), ["asado", "musica", "green-day", "star-wars"]]
-    john_doe = ["contraseña", "John", "Doe", "hombre", 25, (, ), ["bicicleta", "taekwondo", "buenos-aires", "basquet"]]
-    kakyoin = ["contraseña", "Noriaki", "Kakyoin", "hombre", 18, (, ), ["chupetines", "cerezas", "esmeraldas", "verde", "lentes"]]
-    straizzo = ["contraseña", "Dire", "Straizzo", "hombre", 27, (, ), ["", "", "", ""]]
+    suzi_q = ["contraseña", "Suzi", "Q", "mujer", 50, (0, 0), ["fotografia", "japon", "bromas", ""]]
+    joseph_joestar = ["contraseña", "Joseph", "Joestar", "hombre", 50, (50, 10), ["disfraces", "armas", "nueva-york", ""]]
+    dio_brando = ["contraseña", "Dio", "Brando", "hombre", 99, (0, 0), ["sangre", "poder", "gatos", "relojes", "cuchillos"]]
+    erina_obacha = ["contraseña", "Erina", "Pendleton", "mujer", 18, (10, 6), ["medicina", "", "", ""]]
+    jane_doe = ["contraseña", "Jane", "Doe", "mujer", 25, (0, 0), ["asado", "musica", "green-day", "star-wars"]]
+    john_doe = ["contraseña", "John", "Doe", "hombre", 25, (0, 0), ["bicicleta", "taekwondo", "buenos-aires", "basquet"]]
+    kakyoin = ["contraseña", "Noriaki", "Kakyoin", "hombre", 18, (95, 1), ["chupetines", "cerezas", "esmeraldas", "verde", "lentes"]]
+    straizzo = ["contraseña", "Dire", "Straizzo", "hombre", 27, (0, 0), ["SS", "alemania", "jamon", "rosas", "mechs"]]
     diccionario = {"juan_perez": juan_perez, "giorno_giovanna": giorno_giovanna, "jotaro_kujo": jotaro_kujo, "lisa_lisa": lisa_lisa, "suzi_q": suzi_q, "joseph_joestar": joseph_joestar, "dio_brando": dio_brando, "erina_obacha": erina_obacha, "jane_doe": jane_doe, "john_doe": john_doe, "kakyoin": kakyoin, "straizzo": straizzo}
     return diccionario
 
 
-
-
-if __name__ == "__main__":
-    usuarios = cargar_datos_prueba():
-        for pseudonimo in usuarios:
-            print("{pseudonimo}\n{} {} {} {} {} {} {}".format(usuarios[pseudonimo][0],usuarios[pseudonimo][1],usuarios[pseudonimo][2],usuarios[pseudonimo][3],usuarios[pseudonimo][4],usuarios[pseudonimo][5],usuarios[pseudonimo][6]) )
+#if __name__ == "__main__":
+#    usuarios = cargar_datos_prueba()
+#    for pseudonimo in usuarios:
+#        print("{pseudonimo}\n{} {} {} {} {} {} {}".format(usuarios[pseudonimo][0],usuarios[pseudonimo][1],usuarios[pseudonimo][2],usuarios[pseudonimo][3],usuarios[pseudonimo][4],usuarios[pseudonimo][5],usuarios[pseudonimo][6]) )
