@@ -271,4 +271,5 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
         print("Editar? No hay presupuesto para tantas funcionalidades.")
         opcion_usuario = "0"
     elif opcion_usuario == "5":     ###pongo elif por las dudas, cambiar luego de testear mucho
+        print("Chau hermose <3")
         exit()
