@@ -4,6 +4,7 @@
 from datos_prueba import cargar_datos_prueba
 from geopy.distance import geodesic
 
+
 def menu_principal():
     print("MENU PRINCIPAL\n")
     print("1: Cargar conjunto prueba")
@@ -15,6 +16,7 @@ def menu_principal():
     while user_input not in (*"12345",):     #tupla conteniendo las opciones empaquetadas. verifica que el usuario no ingrese entradas no permitidas
         user_input = input("Entrada no válida. Por favor, elija una de las opciones indicadas:\n")
     return user_input
+
 
 def registro():
     nombre = input("Ingrese su nombre\n")
@@ -28,6 +30,7 @@ def registro():
     diccionario_usuarios[pseudonimo] = [contraseña, nombre, apellido, sexo, edad, ubicacion, intereses]
     return diccionario_usuarios
 
+
 def nuevo_pseudonimo(dicc_usuarios):
     enProceso = True
     while enProceso:        ###para ver si el proceso de elegir pseudonimo esta terminado o en proceso
@@ -40,12 +43,14 @@ def nuevo_pseudonimo(dicc_usuarios):
             enProceso = False
     return pseudonimo
 
+
 def esValidoPseudonimo(string_de_caracteres):           #Chequea que el pseudonimo no contenga caracteres no permitidos
     caracteres_permitidos = (*"abcdefghijklmnopqrstuvwxyz1234567890_",)         #Tupla conteniendo los carateres permitidos en forma empaquetada
     for caracter in string_de_caracteres:
         if caracter not in caracteres_permitidos:
             return False
     return True
+
 
 def password():                     ###perdon si es confuso, ni yo la entiendo
     mayuscula = False
@@ -80,6 +85,7 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
                     valido = "Si"
     return santo_y_seña
 
+
 def sex():
     sexo_valido = False
     ##salir = False
@@ -99,6 +105,7 @@ def sex():
             sexo = "indefinido"
     return sexo
 
+
 def age():
     invalido = True
     while invalido:
@@ -116,6 +123,7 @@ def age():
         if invalido:
             print("Edad invalida. Debe ser un numero entre 18 y 99.")
     return int(edad)
+
 
 def location():         #pregunta su ubicacion al ususario
     valido = False
@@ -140,6 +148,7 @@ def location():         #pregunta su ubicacion al ususario
     ubicacion = (latitud, longitud)
     return ubicacion
 
+
 def interests():
     otro_mas = True
     intereses = []
@@ -155,6 +164,7 @@ def interests():
         else: otro_mas = False
     return intereses
 
+
 def es_valido_interes(interes, intereses):
     caracteres_validos = (*"abcdefghijklmnopqrstuvwxyz1234567890-",)
     for caracter in interes:
@@ -163,6 +173,7 @@ def es_valido_interes(interes, intereses):
     if interes in intereses:    #se fija que no este repetido
         return False
     return True
+
 
 def ingresar(dicc):
     usuarioValido = False
@@ -177,7 +188,6 @@ def ingresar(dicc):
             respuesta = input("desea continuar? (0 para salir, cualquier cosa para continuar\n")
         if respuesta == "0":
             salir = True
-
     contraseñaValida = False
     while not contraseñaValida or not salir:
         contraseña = input("ingrese su contraseña\ncontraseña: ")
@@ -189,10 +199,9 @@ def ingresar(dicc):
         if respuesta == "0":
             salir = True
     if usuarioValido and contraseñaValida:
-        return pseudonimo,True
+        return pseudonimo, True
     return None, False
 
-def editar():        ###OPCIONAL, NO HACER BAJO NINGUNA CIRCUNSTANCIA   -/- suena como un reto ¬.o
 
 def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en un diccionario
     print("Sexo en el que esta interesade")
@@ -202,6 +211,7 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
     rango_distancia = float(input("Rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros. El número puede ser decimal:\n"))
     lista = [pseudonimo, [sexo_buscar, rango_edad, rango_distancia]]
     return lista
+
 
 def findMatch(dicc_usuarios, lista_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
     info_usuario = dicc_usuarios.pop(lista_busqueda[0])     #quita al usuario en sesion del diccionario y devuelve su informacion (value correspondiente a esa key) a info_usuaario.
@@ -216,6 +226,7 @@ def findMatch(dicc_usuarios, lista_busqueda):       ###le das el diccionario con
             datos = dicc_usuarios.pop(usuario)
             dicc_matches.update({usuario:datos})
     return dicc_matches, lista_busqueda          ###lista_busqueda ahora tambien tiene los datos de su usuario. no se si vale la pena hacer esto. quizas lo cambie. esta asi porque va a usar info agregada en la funcion de abajo
+
 
 def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los usarios matcehados y el porcentaje de match de cada uno.
     for match in dicc_matches:
@@ -234,9 +245,6 @@ def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los us
         ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
     print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
     print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
-
-
-
 
 
 #Bloque principal
