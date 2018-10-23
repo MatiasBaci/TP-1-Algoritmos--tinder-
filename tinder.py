@@ -19,7 +19,7 @@ def menu_principal():
     return user_input
 
 
-def registro():
+def registro(diccionario_usuarios):
     nombre = input("Ingrese su nombre\n")
     apellido = input("Ingrese su apellido\n")
     pseudonimo = nuevo_pseudonimo(diccionario_usuarios)
@@ -270,8 +270,7 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
             time.sleep(3)
         opcion_usuario = "0"
     elif opcion_usuario == "2":
-        usuario_nuevo = registro()
-        diccionario_usuarios_nuevos.update(usuario_nuevo)
+        diccionario_usuarios.update(registro(diccionario_usuarios))
     elif opcion_usuario == "3":
         pseudonimoIngresado, valido = ingresar(diccionario_usuarios)
         if not valido:
