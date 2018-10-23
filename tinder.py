@@ -116,7 +116,7 @@ def age():
     invalido = True
     while invalido:
         invalido = False
-        edad = input("Ingrese su edad\n>")
+        edad = input("Ingrese edad\n>")
         if len(edad) > 2:       ###es para que la funcion no compare caracter por caracter si es que son muchos, porque ya es invalido
             invalido = True
         else:
@@ -215,10 +215,10 @@ def ingresar(dicc):
 
 
 def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en un diccionario
-    print("Sexo en el que esta interesade")
+    print("Sexo en el que esta interesade\n")
     time.sleep(1)
     sexo_buscar = sex()
-    print("Rango de edades en las que esta interesade")
+    print("Rango de edades en las que esta interesade (la edad maxima de busqueda)\n")
     time.sleep(2)
     rango_edad = age()
     rango_distancia = float(input("Rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros, puede ser decimal\n>"))
