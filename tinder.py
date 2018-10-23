@@ -81,8 +81,10 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
                         minuscula = True
                 else:
                     mayuscula = True
+                if valido == "No se" and len(santo_y_seña) == i+1:
                     valido = "Si"
     return santo_y_seña
+
 
 
 def sex():
@@ -242,6 +244,7 @@ def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los us
         round(porcentaje)
         nombre = dicc_matches[match][1]
         apellido = dicc_matches[match][2]
+        print("Match!!! OwO <3 {nombre} {apellido} y vos tienen un {porcentaje}% de intereses en comun.")   ###si falla poner .format
         ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
     print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
     print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
