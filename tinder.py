@@ -63,15 +63,15 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
         mayuscula = False
         minuscula = False
         numero = False
-        santo_y_sena = str(input("Ingrese contraseña de al menos 5 caracteres con numeros, minusculas y mayusculas\n"))
-        if len(santo_y_sena) >= 5:
+        santo_y_seña = str(input("Ingrese contraseña de al menos 5 caracteres con numeros, minusculas y mayusculas\n"))
+        if len(santo_y_seña) >= 5:
             valido = "No se"
             i = -1
             while valido == "No se":
                 i += 1
-                if santo_y_sena[i] not in tupla_mayusculas:
-                    if santo_y_sena[i] not in tupla_minusculas:
-                        if santo_y_sena[i] not in tupla_numeros:                      ###es como 3D OOoo..ooOOoo.. whoa
+                if santo_y_seña[i] not in tupla_mayusculas:
+                    if santo_y_seña[i] not in tupla_minusculas:
+                        if santo_y_seña[i] not in tupla_numeros:                      ###es como 3D OOoo..ooOOoo.. whoa
                             valido = "No"
                             numero = False
                             print("Caracter(es) invalido(s)")
@@ -81,9 +81,10 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
                         minuscula = True
                 else:
                     mayuscula = True
-                if valido == "No se" and len(santo_y_sena) == i + 1:
+                if valido == "No se" and len(santo_y_seña) == i + 1:
                     valido = "Si"
-    return santo_y_sena
+    return santo_y_seña
+
 
 
 def sex():
@@ -129,12 +130,9 @@ def location():
     lat_valido = False
     while not lat_valido:
         try:
-            latitud = float(input("ingrese su latitud").replace(",","."))
+            latitud = float(input("ingrese su latitud").replace(",", "."))
         except TypeError:
             print("oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
-            latitud = -1
-        if latitud < 0:
-            print("intentelo otra vez")
         else:
             lat_valido = True
     lon_valido = False
@@ -143,12 +141,9 @@ def location():
             longitud = float(input("ingrese su longitud"))
         except TypeError:
             print("oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
-            longitud = -1
-        if longitud < 0:
-            print("intentelo otra vez")
         else:
-            longitud = True
-    return (latitud,longitud)
+            lon_valido = True
+    return (latitud, longitud)
 
 
 def interests():
@@ -243,7 +238,7 @@ def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los us
         round(porcentaje)
         nombre = dicc_matches[match][1]
         apellido = dicc_matches[match][2]
-        print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))
+        print("Match!!! OwO <3 {nombre} {apellido} y vos tienen un {porcentaje}% de intereses en comun.")   ###si falla poner .format
         ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
     print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
     print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
