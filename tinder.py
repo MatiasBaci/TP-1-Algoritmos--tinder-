@@ -91,7 +91,7 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
 
 
 
-def sex():
+def sex():      ###permitir que busque varios sexos
     sexo_valido = False
     ##salir = False
     caracteres_permitidos = ("h", "m", "i", "hombre", "mujer", "indefinido")
@@ -101,7 +101,7 @@ def sex():
             sexo_valido = True
         else:
             print("Invalido")
-            time.sleep(2)
+            time.sleep(1)
     if sexo not in ("hombre", "mujer", "indefinido"):
         if sexo == "h":
             sexo = "hombre"
@@ -206,7 +206,7 @@ def ingresar(dicc):
         else:
             print("Contraseña inválida")
             time.sleep(1)
-            respuesta = input("Desea continuar? (0 para salir, cualquier cosa para continuar\n>")
+            respuesta = input("Desea continuar? (0 para salir, cualquier cosa para continuar)\n>")
         if respuesta == "0":
             salir = True
     if usuarioValido and contraseñaValida:
@@ -238,6 +238,9 @@ def findMatch(dicc_usuarios, lista_busqueda):       ###le das el diccionario con
         if (edad_min <= dicc_usuarios[usuario][4] <= edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[0][2]):
             datos = dicc_usuarios.pop(usuario)
             dicc_matches.update({usuario:datos})
+    if dicc_matches == {}:
+        print("No hubo ningun match. Estas destinadx a morir solx :(")
+        time.sleep(2)
     return dicc_matches, lista_busqueda          ###lista_busqueda ahora tambien tiene los datos de su usuario. no se si vale la pena hacer esto. quizas lo cambie. esta asi porque va a usar info agregada en la funcion de abajo
 
 
@@ -284,13 +287,13 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
         opcion_usuario = "0"
     elif opcion_usuario == "2":
         diccionario_usuarios.update(registro(diccionario_usuarios))
+        opcion_usuario = "0"
     elif opcion_usuario == "3":
         pseudonimoIngresado, valido = ingresar(diccionario_usuarios)
-        if not valido:
-            opcion_usuario = "0"
-        else:
+        if valido:
             lista_busqueda = busqueda(diccionario_usuarios)
             lista_busqueda = busqueda(pseudonimoIngresado)
+        opcion_usuario = "0"
     elif opcion_usuario == "4":
         print("Editar? No hay presupuesto para tantas funcionalidades.")
         time.sleep(3)
