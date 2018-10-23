@@ -242,15 +242,14 @@ def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los us
         nombre = dicc_matches[match][1]
         apellido = dicc_matches[match][2]
         print("Match!!! OwO <3 {nombre} {apellido} y vos tienen un {porcentaje}% de intereses en comun.")  ###si falla poner .format        ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
-        time.wait(1)
+        time.sleep(1)
     print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
-    time.wait(5)
+    time.sleep(5)
     print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
-    time.wait(5)
+    time.sleep(5)
 
 
 #Bloque principal
-
 
 print("Bienvenide a la version python de tinder! >w< <3")
 diccionario_usuarios = {}           ###aca van a ir todos los usuarios. los cargados y los nuevos      
