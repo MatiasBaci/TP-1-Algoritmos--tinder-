@@ -140,7 +140,7 @@ def location():
             lat_valido = True
     lon_valido = False
     while not lon_valido:
-         try:
+        try:
             longitud = float(input("ingrese su longitud"))
         except TypeError:
             print("oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
