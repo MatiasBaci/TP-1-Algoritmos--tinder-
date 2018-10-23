@@ -133,9 +133,6 @@ def location():
             latitud = float(input("ingrese su latitud").replace(",","."))
         except TypeError:
             print("oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
-            latitud = -1
-        if latitud < 0:
-            print("intentelo otra vez")
         else:
             lat_valido = True
     lon_valido = False
@@ -144,11 +141,8 @@ def location():
             longitud = float(input("ingrese su longitud"))
         except TypeError:
             print("oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
-            longitud = -1
-        if longitud < 0:
-            print("intentelo otra vez")
         else:
-            longitud = True
+            lon_valido = True
     return (latitud,longitud)
 
 
