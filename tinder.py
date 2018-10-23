@@ -63,15 +63,15 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
         mayuscula = False
         minuscula = False
         numero = False
-        santo_y_seña = input("Ingrese contraseña de al menos 5 caracteres con numeros, minusculas y mayusculas\nContraseña: ")
-        if len(santo_y_seña) >= 5:
+        santo_y_sena = str(input("Ingrese contraseña de al menos 5 caracteres con numeros, minusculas y mayusculas\n"))
+        if len(santo_y_sena) >= 5:
             valido = "No se"
             i = -1
             while valido == "No se":
                 i += 1
-                if santo_y_seña[i] not in tupla_mayusculas:
-                    if santo_y_seña[i] not in tupla_minusculas:
-                        if santo_y_seña[i] not in tupla_numeros:                      ###es como 3D OOoo..ooOOoo.. whoa
+                if santo_y_sena[i] not in tupla_mayusculas:
+                    if santo_y_sena[i] not in tupla_minusculas:
+                        if santo_y_sena[i] not in tupla_numeros:                      ###es como 3D OOoo..ooOOoo.. whoa
                             valido = "No"
                             numero = False
                             print("Caracter(es) invalido(s)")
@@ -81,9 +81,9 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
                         minuscula = True
                 else:
                     mayuscula = True
-                if valido == "No se" and len(santo_y_seña) == i:
+                if valido == "No se" and len(santo_y_sena) == i + 1:
                     valido = "Si"
-    return santo_y_seña
+    return santo_y_sena
 
 
 def sex():
@@ -274,7 +274,7 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
         if not valido:
             opcion_usuario = menu_principal()
         else:
-            lista_busqueda = busqueda(diccionario_usuarios, pseudonimoIngresado)
+            lista_busqueda = busqueda(diccionario_usuarios)
     elif opcion_usuario == "4":
         print("Editar? No hay presupuesto para tantas funcionalidades.")
         opcion_usuario = "0"
