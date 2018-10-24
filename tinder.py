@@ -173,9 +173,9 @@ def interests():
     otro_mas = True
     intereses = []
     while otro_mas:
-        interes = input("Ingrese un interes, o 'salir'\n>").lower().strip()
+        interes = input("Ingrese un interes, '0' (cero) para salir (consideramos que 'salir' es un interes valido).\n>").lower().strip()
         interes = interes.replace(" ", "-")
-        if interes != "salir":
+        if interes != "0":
             if es_valido_interes(interes, intereses):
                 intereses.append(interes)
                 print("{} ha sido agregado a sus intereses".format(interes))
@@ -306,7 +306,7 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      #muestra 
                     mensaje = input("Escribi tu mensaje.\n>")
                     #dicc_usuarios[match]["mensajes"]{pseudonimo} = mensaje
                     #print("Mensaje enviado.")
-                    print("El mensaje no se pudo enviar :(")
+                    print("El mensaje no se pudo enviar porque no hay internet.")
                     time.sleep(1)
 
 
