@@ -13,7 +13,7 @@ def menu_principal():
     print("3: Ingresar al sistema")
     print("4: Editar usuario existente")
     print("5: Salir")
-    user_input = input("Por favor elija una de las opciones para proseguir\n>")  #guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
+    user_input = input("Eleji una de las opciones para proseguir\n>")  #guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
     while user_input not in (*"12345",):     #tupla conteniendo las opciones empaquetadas. verifica que el usuario no ingrese entradas no permitidas
         #print("\033[1;31;40m FATAL ERROR!!1!\n")
         #time.sleep(1)
@@ -22,13 +22,13 @@ def menu_principal():
         if user_input == "salir":
             user_input = "5"
         else:
-            user_input = input("Entrada no válida. Por favor, elija una de las opciones indicadas\n>")
+            user_input = input("Entrada no válida. Eleji una de las opciones indicadas\n>")
     return user_input
 
 
 def registro(diccionario_usuarios):
-    nombre = input("Ingrese su nombre\n>")
-    apellido = input("Ingrese su apellido\n>")
+    nombre = input("Ingresa tu nombre\n>")
+    apellido = input("Ingresa tu apellido\n>")
     pseudonimo = nuevo_pseudonimo(diccionario_usuarios)
     contraseña = password()
     sexo = sex()
@@ -44,9 +44,9 @@ def registro(diccionario_usuarios):
 def nuevo_pseudonimo(dicc_usuarios):
     en_proceso = True
     while en_proceso:        ###para ver si el proceso de elegir pseudonimo esta terminado o en proceso
-        pseudonimo = input("Ingrese su pseudonimo, compuesto unicamente de minusculas, numeros y guiones bajos\n>")
+        pseudonimo = input("Ingresa tu pseudonimo, compuesto unicamente de minusculas, numeros y guiones bajos\n>")
         if pseudonimo in dicc_usuarios:
-            print("El pseudónimo elegido ya esta en uso. Por favor eliga otro")
+            print("El pseudónimo elegido ya esta en uso. Eleji otro")
             time.sleep(2)
         elif not es_valido_pseudonimo(pseudonimo):        #Entra a esta parte si el pseudonimo no es valido
             print("El pseudónimo solo puede contener minusculas, números y guiones bajos '_'")
@@ -75,7 +75,7 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
         mayuscula = False
         minuscula = False
         numero = False
-        santo_y_seña = str(input("Ingrese contraseña de al menos 5 caracteres con numeros, minusculas y mayusculas, sin espacios\n>"))
+        santo_y_seña = str(input("Ingresa contraseña de al menos 5 caracteres con numeros, minusculas y mayusculas, sin espacios\n>"))
         if len(santo_y_seña) >= 5:
             valido = "No se"
             i = -1
@@ -124,7 +124,7 @@ def age():
     invalido = True
     while invalido:
         invalido = False
-        edad = input("Ingrese edad\n>")
+        edad = input("Ingresa edad\n>")
         if len(edad) > 2 or edad == '':       ###es para que la funcion no compare caracter por caracter si es que son muchos, porque ya es invalido
             invalido = True
         else:
@@ -135,7 +135,10 @@ def age():
             if int(edad) > 99 or int(edad) < 18:
                 invalido = True
         if invalido:
-            print("Edad invalida. Debe ser un numero entre 18 y 99.")
+            if 0 < edad < 18:
+                print("La policia ha sido notificada. Un patrullero esta en camino.")
+            else:
+                print("Edad invalida. Debe ser un numero entre 18 y 99.")
             time.sleep(2)
     return int(edad)
 
@@ -173,12 +176,12 @@ def interests():
     otro_mas = True
     intereses = []
     while otro_mas:
-        interes = input("Ingrese un interes, '0' (cero) para salir (consideramos que 'salir' es un interes valido).\n>").lower().strip()
+        interes = input("Ingresa un interes, '0' (cero) para salir (consideramos que 'salir' es un interes valido).\n>").lower().strip()
         interes = interes.replace(" ", "-")
         if interes != "0":
             if es_valido_interes(interes, intereses):
                 intereses.append(interes)
-                print("{} ha sido agregado a sus intereses".format(interes))
+                print("{} ha sido agregado a tus intereses".format(interes))
                 time.sleep(1)
             else:
                 print("Caracteres invalidos, o el interes ya se encuentra en su lista de intereses")
@@ -205,14 +208,14 @@ def ingresar(dicc):
     salir = False
     respuesta = "1"
     while not usuario_valido and not salir:
-        pseudonimo = input("Ingrese su nombre de usuario (pseudonimo)\n>")
+        pseudonimo = input("Ingresa tu nombre de usuario (pseudonimo)\n>")
         usuario_valido = True
         if pseudonimo not in dicc:
-            print("Usuario equivocado. Inténtelo de nuevo")
+            print("Usuario equivocado. Intentalo de nuevo")
             time.sleep(1)
             usuario_valido = False
-            respuesta = input("Desea continuar? ('salir', o cualquier otra cosa para continuar)\n>")
-        if respuesta == "salir":
+            respuesta = input("Reintentar? s/n\n>")
+        if respuesta == "n" or respuesta == "no":
             salir = True
     contraseña_valida = False
     while not contraseña_valida and not salir:
@@ -222,8 +225,8 @@ def ingresar(dicc):
         else:
             print("Contraseña inválida")
             time.sleep(1)
-            respuesta = input("Desea continuar? ('salir', o cualquier otra cosa para continuar)\n>")
-        if respuesta == "salir":
+            respuesta = input("Reintentar? s/n\n>")
+        if respuesta == "n" or respuesta == "no":
             salir = True
     if usuario_valido and contraseña_valida:
         return pseudonimo, True
@@ -289,9 +292,10 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      #muestra 
         porcentaje = round(porcentaje)
         nombre = dicc_matches[match]["nombre"]
         apellido = dicc_matches[match]["apellido"]
-        print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))    ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
+        print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))
         time.sleep(1)
         respuesta = input("like/hate ?\n>").lower   #si el usuario quiere dejar like, y mensaje
+        ###por alguna razon la primera vez siempre entra al while, sin importar lo que pongas
         time.sleep(1)
         while respuesta != "like" and respuesta != "hate":
             respuesta = input("Respuesta no valida. Like/hate ?\n>").lower()
@@ -303,14 +307,13 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      #muestra 
             if dicc_usuarios[pseudonimo] in dicc_usuarios[match]["likes"]:
                 respuesta = input("{} ya te habia dejado un like a vos. ¿Queres dejar un mensaje? s/n\n>".format(nombre)).lower
                 if respuesta == "s" or respuesta == "si":
+                    print("Solo podes dejar un mensaje. Usalo bien.")
+                    time.sleep(1)
                     mensaje = input("Escribi tu mensaje.\n>")
                     #dicc_usuarios[match]["mensajes"]{pseudonimo} = mensaje
                     #print("Mensaje enviado.")
                     print("El mensaje no se pudo enviar porque no hay internet.")
                     time.sleep(1)
-
-
-#def like_msg():
 
 
 def ver_mensajes(pseudonimo, dicc_usuarios):
