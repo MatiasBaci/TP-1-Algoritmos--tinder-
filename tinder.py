@@ -261,13 +261,13 @@ def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los us
             if interest in intereses_match:
                 comun += 1
         porcentaje = 100 * 2 / total
-        #round(porcentaje)
-        porcentaje = str(porcentaje)
-        porcentaje2 = ""
-        for digito in porcentaje:
-            while digito != '.':
-                porcentaje2 = porcentaje2 + digito
-        porcentaje = int(porcentaje2)
+        porcentaje = round(porcentaje)
+        #porcentaje = str(porcentaje)
+        #porcentaje2 = ""
+        #for digito in porcentaje:
+        #    while digito != '.':
+        #        porcentaje2 = porcentaje2 + digito
+        #porcentaje = int(porcentaje2)
         nombre = dicc_matches[match][1]
         apellido = dicc_matches[match][2]
         print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))    ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
