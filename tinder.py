@@ -15,7 +15,7 @@ def menu_principal():
     print("5: Salir")
     user_input = input("Por favor elija una de las opciones para proseguir\n>")  #guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
     while user_input not in (*"12345",):     #tupla conteniendo las opciones empaquetadas. verifica que el usuario no ingrese entradas no permitidas
-        #print("\033[1;31;40m FATAL ERROR!!!\n")
+        #print("\033[1;31;40m FATAL ERROR!!1!\n")
         #time.sleep(1)
         #print("No, mentira.")
         #time.sleep(1)
@@ -32,7 +32,7 @@ def registro(diccionario_usuarios):
     edad = age()
     ubicacion = location()
     intereses = interests()
-    diccionario_usuarios[pseudonimo] = [contraseña, nombre, apellido, sexo, edad, ubicacion, intereses]
+    diccionario_usuarios[pseudonimo] = {"contraseña":contraseña, "nombre":nombre, "apellido":apellido, "sexo":sexo, "edad":edad, "ubicacion":ubicacion, "intereses":intereses}
     return diccionario_usuarios
 
 
@@ -212,13 +212,13 @@ def ingresar(dicc):
     contraseñaValida = False
     while not contraseñaValida and not salir:
         contraseña = input("Ingrese su contraseña\n>")
-        if contraseña == dicc[pseudonimo][0]:
+        if contraseña == dicc[pseudonimo]["contraseña"]:
             contraseñaValida = True
         else:
             print("Contraseña inválida")
             time.sleep(1)
-            respuesta = input("Desea continuar? (0 para salir, cualquier cosa para continuar)\n>")
-        if respuesta == "0":
+            respuesta = input("Desea continuar? (0 o 'salir' para salir, cualquier otra cosa para continuar)\n>")
+        if respuesta == "0" or respuesta == "salir":
             salir = True
     if usuarioValido and contraseñaValida:
         return pseudonimo, True
@@ -238,11 +238,11 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
     time.sleep(0.5)
     edad_max = age()
     rango_distancia = float(input("Rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros, puede ser decimal\n>"))
-    lista = [pseudonimo, [sexo_buscar, (edad_min, edad_max), rango_distancia]]
-    return lista
+    dicc_busqueda = {"pseudonimo":pseudonimo, "sexo_buscar":sexo_buscar, "rango_edad":(edad_min, edad_max), "rango_distancia_":rango_distancia}
+    return dicc_busqueda
 
-
-def findMatch(dicc_usuarios, lista_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
+                            ###este no lo termine
+def findMatch(dicc_usuarios, dicc_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
     info_usuario = dicc_usuarios[lista_busqueda[0]]     #quita al usuario en sesion del diccionario y devuelve su informacion (value correspondiente a esa key) a info_usuaario.
     lista_busqueda.append(info_usuario)
     dicc_matches = {}
@@ -251,7 +251,6 @@ def findMatch(dicc_usuarios, lista_busqueda):       ###le das el diccionario con
         edad_max = lista_busqueda[1][1][1]
         sexo_interesado = lista_busqueda[1][0]
         distancia_al_usuario = geodesic(dicc_usuarios[usuario][5], info_usuario[5]).kilometers    #VOLVER A PONER CUANDO SE SOLUCIONE GEOPY
-        #distancia_al_usuario = lista_busqueda[1][2] ###PROVISORIO, REMOVER AL SOLUCIONAR GEOPY
         if (edad_min <= dicc_usuarios[usuario][4] <= edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[1][2]):
             datos = dicc_usuarios[usuario]
             dicc_matches.update({usuario:datos})
