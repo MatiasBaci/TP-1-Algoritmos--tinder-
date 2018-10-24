@@ -243,39 +243,39 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
 
 
 def find_match(dicc_usuarios, dicc_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
-    info_usuario = dicc_usuarios[dicc_busqueda["pseudonimo"]]     #devuelve la info del usuario (value correspondiente a esa key) a info_usuario.
-    dicc_busqueda.append(info_usuario)  ###tiene que ser .update
+        #dicc_usuarios es el diccionario con todos los usuarios
+        #dicc_busqueda tiene el pseudonimo del usuario actual y sus parametros de busqueda
     dicc_matches = {}
     for usuario in dicc_usuarios:           #por cada usuario en el diccionario se fija si hacen match. si hay, mete a ese usuario y sus datos (values) en otro diccionario 'dicc_matches'
         edad_min = dicc_busqueda["rango_edad"][0]
         edad_max = dicc_busqueda["rango_edad"][1]
         sexo_interesado = dicc_busqueda["sexo_buscar"]
-        distancia_al_usuario = geodesic(dicc_usuarios[usuario][5], info_usuario[5]).kilometers
-        if (edad_min <= dicc_usuarios[usuario][4] <= edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= dicc_busqueda["rango_distancia"]):
+        distancia_al_usuario = geodesic(dicc_usuarios[usuario]["ubicacion"], dicc_usuarios[dicc_busqueda["pseudonimo"]]["ubicacion"]).kilometers
+        if (edad_min <= dicc_usuarios[usuario]["edad"] <= edad_max) and (dicc_usuarios[usuario]["sexo"] == sexo_interesado) and (distancia_al_usuario <= dicc_busqueda["rango_distancia"]):
             datos = dicc_usuarios[usuario]
             dicc_matches.update({usuario: datos})
-    if lista_busqueda[0] in dicc_matches:
-        del dicc_matches[lista_busqueda[0]]
+    if dicc_busqueda["pseudonimo"] in dicc_matches: #si el usuario que esta buscando ahora se encuentra en sus propios matches lo quita
+        del dicc_matches[dicc_busqueda["pseudonimo"]]
     if dicc_matches == {}:
         print("No hubo ningun match. Estas destinadx a morir solx :(")
         time.sleep(2)
-    return dicc_matches, lista_busqueda          ###lista_busqueda ahora tambien tiene los datos de su usuario. no se si vale la pena hacer esto. quizas lo cambie. esta asi porque va a usar info agregada en la funcion de abajo
+    return dicc_matches, dicc_busqueda
 
 
-def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los usarios matcehados y el porcentaje de match de cada uno.
+def porcentaje_match(dicc_matches, dicc_usuarios):      ### debe mostrar los usarios matcehados y el porcentaje de match de cada uno.
     for match in dicc_matches:
-        intereses_match = dicc_matches[match][-1]
-        intereses_usuario = lista_busqueda[-1][-1]
+        intereses_match = dicc_matches[match]["intereses"]
+        intereses_usuario = dicc_usuarios["intereses"]
         total = len(intereses_match) + len(intereses_usuario)
         comun = 0
-        for interest in intereses_usuario:      ###se fija si cada interes del usuario esta en los intereses del match
+        for interest in intereses_usuario:      ###se fija cuantos intereses del usuario estan en los intereses del match
             if interest in intereses_match:
                 comun += 1
         #porcentaje = 100 * 2 * comun / total       mas parecida a la consigna pero que funciona + o -
         porcentaje = 100 * comun / len(intereses_usuario)
         porcentaje = round(porcentaje)
-        nombre = dicc_matches[match][1]
-        apellido = dicc_matches[match][2]
+        nombre = dicc_matches[match]["nombre"]
+        apellido = dicc_matches[match]["apellido"]
         print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))    ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
         time.sleep(1)
     if dicc_matches:
@@ -315,9 +315,9 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
         pseudonimoIngresado, valido = ingresar(diccionario_usuarios)
         if valido:
             #lista_busqueda = busqueda(diccionario_usuarios)
-            lista_busqueda = busqueda(pseudonimoIngresado)
-            dicc_matches, lista_busqueda = find_match(diccionario_usuarios, lista_busqueda)
-            porcentaje_match(dicc_matches, lista_busqueda)
+            dicc_busqueda = busqueda(pseudonimoIngresado)
+            dicc_matches, dicc_busqueda = find_match(diccionario_usuarios, dicc_busqueda)
+            porcentaje_match(dicc_matches, dicc_busqueda)
         opcion_usuario = "0"
     elif opcion_usuario == "4":
         print("Editar? No hay presupuesto para tantas funcionalidades.")
