@@ -13,7 +13,7 @@ def menu_principal():
     print("3: Ingresar al sistema")
     print("4: Editar usuario existente")
     print("5: Salir")
-    user_input = input("Eleji una de las opciones para proseguir\n>")  #guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
+    user_input = input("Elegi una de las opciones para proseguir\n>")  #guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
     while user_input not in (*"12345",):     #tupla conteniendo las opciones empaquetadas. verifica que el usuario no ingrese entradas no permitidas
         #print("\033[1;31;40m FATAL ERROR!!1!\n")
         #time.sleep(1)
@@ -22,7 +22,7 @@ def menu_principal():
         if user_input == "salir":
             user_input = "5"
         else:
-            user_input = input("Entrada no válida. Eleji una de las opciones indicadas\n>")
+            user_input = input("Entrada no válida. Elegi una de las opciones indicadas\n>")
     return user_input
 
 
@@ -46,7 +46,7 @@ def nuevo_pseudonimo(dicc_usuarios):
     while en_proceso:        ###para ver si el proceso de elegir pseudonimo esta terminado o en proceso
         pseudonimo = input("Ingresa tu pseudonimo, compuesto unicamente de minusculas, numeros y guiones bajos\n>")
         if pseudonimo in dicc_usuarios:
-            print("El pseudónimo elegido ya esta en uso. Eleji otro")
+            print("El pseudónimo elegido ya esta en uso. Elegi otro")
             time.sleep(2)
         elif not es_valido_pseudonimo(pseudonimo):        #Entra a esta parte si el pseudonimo no es valido
             print("El pseudónimo solo puede contener minusculas, números y guiones bajos '_'")
