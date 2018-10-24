@@ -218,7 +218,7 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
     print("Sexo en el que esta interesade\n")
     time.sleep(1)
     sexo_buscar = sex()
-    time.sleep(2)
+    time.sleep(1)
     #rango_edad = age()
     print("Edad minima de busqueda\n")
     edad_min = age()
@@ -237,10 +237,11 @@ def findMatch(dicc_usuarios, lista_busqueda):       ###le das el diccionario con
         edad_min = lista_busqueda[1][1][0]
         edad_max = lista_busqueda[1][1][1]
         sexo_interesado = lista_busqueda[1][0]
-        distancia_al_usuario = geodesic(dicc_usuarios[usuario][5], info_usuario[5])
-        #if (edad_min <= dicc_usuarios[usuario][4] <= edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[0][2]):
+        #distancia_al_usuario = geodesic(dicc_usuarios[usuario][5], info_usuario[5])    #VOLVER A PONER CUANDO SE SOLUCIONE GEOPY
+        distancia_al_usuario = lista_busqueda[1][2] ###PROVISORIO, REMOVER AL SOLUCIONAR GEOPY
         if (edad_min <= dicc_usuarios[usuario][4] <= edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[1][2]):
-            datos = dicc_usuarios.pop(usuario)
+            #datos = dicc_usuarios.pop(usuario)
+            datos = dicc_usuarios[usuario]
             dicc_matches.update({usuario:datos})
     if dicc_matches == {}:
         print("No hubo ningun match. Estas destinadx a morir solx :(")
@@ -261,7 +262,7 @@ def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los us
         round(porcentaje)
         nombre = dicc_matches[match][1]
         apellido = dicc_matches[match][2]
-        print("Match!!! OwO <3 {nombre} {apellido} y vos tienen un {porcentaje}% de intereses en comun.")  ###si falla poner .format        ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
+        print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))    ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
         time.sleep(1)
     print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
     time.sleep(5)
