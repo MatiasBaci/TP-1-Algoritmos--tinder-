@@ -300,6 +300,8 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
         opcion_usuario = "0"
     elif opcion_usuario == "2":
         diccionario_usuarios.update(registro(diccionario_usuarios))
+        print("Usuario registrado con exito.")
+        time.sleep(1)
         opcion_usuario = "0"
     elif opcion_usuario == "3":
         pseudonimoIngresado, valido = ingresar(diccionario_usuarios)
