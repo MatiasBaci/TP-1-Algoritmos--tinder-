@@ -4,6 +4,7 @@
 import time
 from geopy.distance import geodesic
 from datos_prueba import cargar_datos_prueba
+import math
 
 
 def menu_principal():
@@ -116,7 +117,7 @@ def age():
     while invalido:
         invalido = False
         edad = input("Ingrese edad\n>")
-        if len(edad) > 2:       ###es para que la funcion no compare caracter por caracter si es que son muchos, porque ya es invalido
+        if len(edad) > 2 or edad == '':       ###es para que la funcion no compare caracter por caracter si es que son muchos, porque ya es invalido
             invalido = True
         else:
             for caracter in edad:
@@ -175,6 +176,8 @@ def interests():
 
 def es_valido_interes(interes, intereses):
     caracteres_validos = (*"abcdefghijklmnopqrstuvwxyz1234567890-",)
+    if interes == '':
+        return False
     for caracter in interes:
         if caracter not in caracteres_validos:  #se fija que sea valido
             return False
@@ -258,7 +261,13 @@ def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los us
             if interest in intereses_match:
                 comun += 1
         porcentaje = 100 * 2 / total
-        round(porcentaje)
+        #round(porcentaje)
+        porcentaje = str(porcentaje)
+        porcentaje2 = ""
+        for digito in porcentaje:
+            while digito != '.':
+                porcentaje2 = porcentaje2 + digito
+        porcentaje = int(porcentaje2)
         nombre = dicc_matches[match][1]
         apellido = dicc_matches[match][2]
         print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))    ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
