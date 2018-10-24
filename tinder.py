@@ -15,6 +15,10 @@ def menu_principal():
     print("5: Salir")
     user_input = input("Por favor elija una de las opciones para proseguir\n>")  #guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
     while user_input not in (*"12345",):     #tupla conteniendo las opciones empaquetadas. verifica que el usuario no ingrese entradas no permitidas
+        #print("\033[1;31;40m FATAL ERROR!!!\n")
+        #time.sleep(1)
+        #print("No, mentira.")
+        #time.sleep(1)
         user_input = input("Entrada no válida. Por favor, elija una de las opciones indicadas\n>")
     return user_input
 
@@ -140,7 +144,10 @@ def location():
             print("Oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
             time.sleep(2)
         else:
-            lat_valido = True
+            if (-90 <= latitud <= 90):
+                lat_valido = True
+            else:
+                print("Te equivocaste, no pasa nada. Latitud debe estar entre -90 y 90")
     lon_valido = False
     while not lon_valido:
         try:
@@ -149,7 +156,10 @@ def location():
             print("Oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
             time.sleep(2)
         else:
-            lon_valido = True
+            if (-180 <= longitud <= 180):
+                lon_valido = True
+            else:
+                print("Todos cometemos errores. Longitud debe estar entre -180 y 180")
     ubicacion = (latitud, longitud)
     return ubicacion
 
@@ -262,20 +272,15 @@ def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los us
                 comun += 1
         porcentaje = 100 * 2 / total
         porcentaje = round(porcentaje)
-        #porcentaje = str(porcentaje)
-        #porcentaje2 = ""
-        #for digito in porcentaje:
-        #    while digito != '.':
-        #        porcentaje2 = porcentaje2 + digito
-        #porcentaje = int(porcentaje2)
         nombre = dicc_matches[match][1]
         apellido = dicc_matches[match][2]
         print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))    ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
         time.sleep(1)
-    print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
-    time.sleep(5)
-    print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
-    time.sleep(5)
+    if dicc_matches:
+        print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
+        time.sleep(5)
+        print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
+        time.sleep(5)
 
 
 #Bloque principal
