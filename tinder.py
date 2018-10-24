@@ -1,7 +1,9 @@
 ###uso 3 numeral (###) para cuando el mensaje es para nosotros
 ###uso 1 numeral (#) para cuando el mensaje es para los profes
 
-
+import time
+from geopy.distance import geodesic
+from datos_prueba import cargar_datos_prueba
 
 
 def menu_principal():
