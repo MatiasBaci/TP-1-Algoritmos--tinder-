@@ -262,17 +262,17 @@ def find_match(dicc_usuarios, dicc_busqueda):       ###le das el diccionario con
     return dicc_matches, dicc_busqueda
 
 
-def porcentaje_match(dicc_matches, dicc_usuarios):      ### debe mostrar los usarios matcehados y el porcentaje de match de cada uno.
+def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      ### debe mostrar los usarios matcehados y el porcentaje de match de cada uno.
     for match in dicc_matches:
-        intereses_match = dicc_matches[match]["intereses"]
-        intereses_usuario = dicc_usuarios["intereses"]
-        total = len(intereses_match) + len(intereses_usuario)
+        lista_intereses_match = dicc_matches[match]["intereses"]
+        lista_intereses_usuario = dicc_usuarios[dicc_busqueda["pseudonimo"]]["intereses"]
         comun = 0
-        for interest in intereses_usuario:      ###se fija cuantos intereses del usuario estan en los intereses del match
-            if interest in intereses_match:
+        for interest in lista_intereses_usuario:      ###se fija cuantos intereses del usuario estan en los intereses del match
+            if interest in lista_intereses_match:
                 comun += 1
+        #total = len(lista_intereses_match) + len(lista_intereses_usuario)
         #porcentaje = 100 * 2 * comun / total       mas parecida a la consigna pero que funciona + o -
-        porcentaje = 100 * comun / len(intereses_usuario)
+        porcentaje = 100 * comun / len(lista_intereses_usuario)
         porcentaje = round(porcentaje)
         nombre = dicc_matches[match]["nombre"]
         apellido = dicc_matches[match]["apellido"]
@@ -289,7 +289,7 @@ def porcentaje_match(dicc_matches, dicc_usuarios):      ### debe mostrar los usa
 #Bloque principal
 
 print("Bienvenide a la version python de tinder! >w< <3")
-diccionario_usuarios = {}           ###aca van a ir todos los usuarios. los cargados y los nuevos      
+dicc_usuarios = {}           ###aca van a ir todos los usuarios. los cargados y los nuevos
 diccionario_usuarios_nuevos = {}    ###aca solo van a estar los usuarios nuevos
 opcion_usuario = "0"
 datos_ya_cargados = False
@@ -297,8 +297,8 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
     opcion_usuario = menu_principal()
     if opcion_usuario == "1":       #carga los datos del otro archivo si es que no se hizo antes
         if not datos_ya_cargados:
-            diccionario_usuarios_prueba = cargar_datos_prueba()
-            diccionario_usuarios.update(diccionario_usuarios_prueba)
+            dicc_usuarios_prueba = cargar_datos_prueba()
+            dicc_usuarios.update(dicc_usuarios_prueba)
             datos_ya_cargados = True
             print("Los datos han sido cargados")
             time.sleep(1)
@@ -307,17 +307,16 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
             time.sleep(2)
         opcion_usuario = "0"
     elif opcion_usuario == "2":
-        diccionario_usuarios.update(registro(diccionario_usuarios))
+        dicc_usuarios.update(registro(dicc_usuarios))
         print("Usuario registrado con exito.")
         time.sleep(1)
         opcion_usuario = "0"
     elif opcion_usuario == "3":
-        pseudonimoIngresado, valido = ingresar(diccionario_usuarios)
+        pseudonimo_ingresado, valido = ingresar(dicc_usuarios)
         if valido:
-            #lista_busqueda = busqueda(diccionario_usuarios)
-            dicc_busqueda = busqueda(pseudonimoIngresado)
-            dicc_matches, dicc_busqueda = find_match(diccionario_usuarios, dicc_busqueda)
-            porcentaje_match(dicc_matches, dicc_busqueda)
+            dicc_busqueda = busqueda(pseudonimo_ingresado)
+            dicc_matches, dicc_busqueda = find_match(dicc_usuarios, dicc_busqueda)
+            porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios)
         opcion_usuario = "0"
     elif opcion_usuario == "4":
         print("Editar? No hay presupuesto para tantas funcionalidades.")
