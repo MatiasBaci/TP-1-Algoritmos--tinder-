@@ -32,7 +32,7 @@ def registro(diccionario_usuarios):
     pseudonimo = nuevo_pseudonimo(diccionario_usuarios)
     contraseña = password()
     sexo = sex()
-    edad = age()
+    edad = age(0)
     ubicacion = location()
     intereses = interests()
     likes = []
@@ -120,7 +120,7 @@ def sex():      ###permitir que busque varios sexos
     return sexo
 
 
-def age():
+def age(n):
     invalido = True
     while invalido:
         invalido = False
@@ -135,8 +135,11 @@ def age():
             if int(edad) > 99 or int(edad) < 18:
                 invalido = True
         if invalido:
-            if 0 < edad < 18:
-                print("La policia ha sido notificada. Un patrullero esta en camino.")
+            if 0 < int(edad) < 18:
+                if n == 1:
+                    print("La policia ha sido notificada. Un patrullero esta en camino.")
+                else:
+                    print("Edad invalida. Debe ser un numero entre 18 y 99.")
             else:
                 print("Edad invalida. Debe ser un numero entre 18 y 99.")
             time.sleep(2)
@@ -239,12 +242,17 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
     sexo_buscar = sex()
     time.sleep(1)
     #rango_edad = age()
-    print("Edad minima de busqueda")
-    time.sleep(0.5)
-    edad_min = age()
-    print("Edad maxima de busqueda")
-    time.sleep(0.5)
-    edad_max = age()
+    edad_min = 1
+    edad_max = 0
+    while edad_min > edad_max:
+        print("Edad minima de busqueda")
+        time.sleep(0.5)
+        edad_min = age(1)
+        print("Edad maxima de busqueda")
+        time.sleep(0.5)
+        edad_max = age(1)
+        if edad_min > edad_max:
+            print("Quizas pusiste las edades al reves...?")
     rango_distancia = float(input("Rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros, puede ser decimal\n>"))
     dicc_busqueda = {"pseudonimo": pseudonimo, "sexo_buscar": sexo_buscar, "rango_edad": (edad_min, edad_max), "rango_distancia": rango_distancia}
     return dicc_busqueda
