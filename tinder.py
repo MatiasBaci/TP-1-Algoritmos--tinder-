@@ -91,7 +91,7 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
 
 
 
-def sex():      ###permitir que busque varios sexos
+def sex():
     sexo_valido = False
     ##salir = False
     caracteres_permitidos = ("h", "m", "i", "hombre", "mujer", "indefinido")
@@ -101,7 +101,7 @@ def sex():      ###permitir que busque varios sexos
             sexo_valido = True
         else:
             print("Invalido")
-            time.sleep(1)
+            time.sleep(2)
     if sexo not in ("hombre", "mujer", "indefinido"):
         if sexo == "h":
             sexo = "hombre"
@@ -206,7 +206,7 @@ def ingresar(dicc):
         else:
             print("Contraseña inválida")
             time.sleep(1)
-            respuesta = input("Desea continuar? (0 para salir, cualquier cosa para continuar)\n>")
+            respuesta = input("Desea continuar? (0 para salir, cualquier cosa para continuar\n>")
         if respuesta == "0":
             salir = True
     if usuarioValido and contraseñaValida:
@@ -218,14 +218,14 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
     print("Sexo en el que esta interesade\n")
     time.sleep(1)
     sexo_buscar = sex()
-    time.sleep(1)
-    #rango_edad = age()
-    print("Edad minima de busqueda\n")
-    edad_min = age()
-    print("Edad maxima de busqueda\n")
-    edad_max = age()
+    print("Rango de edades en las que esta interesade\n")
+    time.sleep(2)
+    print("ingrese la edad minima de busqueda")
+    rango_edad_min = age()
+    print("ingrese la edad maxima de busqueda")
+    rango_edad_max = age()
     rango_distancia = float(input("Rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros, puede ser decimal\n>"))
-    lista = [pseudonimo, [sexo_buscar, (edad_min, edad_max), rango_distancia]]
+    lista = [pseudonimo, [sexo_buscar, (rango_edad_min,rango_edad_max), rango_distancia]]
     return lista
 
 
@@ -237,15 +237,10 @@ def findMatch(dicc_usuarios, lista_busqueda):       ###le das el diccionario con
         edad_min = lista_busqueda[1][1][0]
         edad_max = lista_busqueda[1][1][1]
         sexo_interesado = lista_busqueda[1][0]
-        #distancia_al_usuario = geodesic(dicc_usuarios[usuario][5], info_usuario[5])    #VOLVER A PONER CUANDO SE SOLUCIONE GEOPY
-        distancia_al_usuario = lista_busqueda[1][2] ###PROVISORIO, REMOVER AL SOLUCIONAR GEOPY
-        if (edad_min <= dicc_usuarios[usuario][4] <= edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[1][2]):
-            #datos = dicc_usuarios.pop(usuario)
-            datos = dicc_usuarios[usuario]
+        distancia_al_usuario = geodesic(dicc_usuarios[usuario][5], info_usuario[5])
+        if (edad_min <= dicc_usuarios[usuario][4] <= edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[0][2]):
+            datos = dicc_usuarios.pop(usuario)
             dicc_matches.update({usuario:datos})
-    if dicc_matches == {}:
-        print("No hubo ningun match. Estas destinadx a morir solx :(")
-        time.sleep(2)
     return dicc_matches, lista_busqueda          ###lista_busqueda ahora tambien tiene los datos de su usuario. no se si vale la pena hacer esto. quizas lo cambie. esta asi porque va a usar info agregada en la funcion de abajo
 
 
@@ -262,7 +257,7 @@ def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los us
         round(porcentaje)
         nombre = dicc_matches[match][1]
         apellido = dicc_matches[match][2]
-        print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))    ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
+        print("Match!!! OwO <3 {nombre} {apellido} y vos tienen un {porcentaje}% de intereses en comun.")  ###si falla poner .format        ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
         time.sleep(1)
     print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
     time.sleep(5)
@@ -295,12 +290,11 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
         opcion_usuario = "0"
     elif opcion_usuario == "3":
         pseudonimoIngresado, valido = ingresar(diccionario_usuarios)
-        if valido:
-            #lista_busqueda = busqueda(diccionario_usuarios)
+        if not valido:
+            opcion_usuario = "0"
+        else:
+            lista_busqueda = busqueda(diccionario_usuarios)
             lista_busqueda = busqueda(pseudonimoIngresado)
-            dicc_matches, lista_busqueda = findMatch(diccionario_usuarios, lista_busqueda)
-            porcentaje_match(dicc_matches, lista_busqueda)
-        opcion_usuario = "0"
     elif opcion_usuario == "4":
         print("Editar? No hay presupuesto para tantas funcionalidades.")
         time.sleep(3)
