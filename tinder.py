@@ -243,7 +243,7 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
 
 
 def findMatch(dicc_usuarios, lista_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
-    info_usuario = dicc_usuarios.pop(lista_busqueda[0])     #quita al usuario en sesion del diccionario y devuelve su informacion (value correspondiente a esa key) a info_usuaario.
+    info_usuario = dicc_usuarios[lista_busqueda[0]]     #quita al usuario en sesion del diccionario y devuelve su informacion (value correspondiente a esa key) a info_usuaario.
     lista_busqueda.append(info_usuario)
     dicc_matches = {}
     for usuario in dicc_usuarios:           #por cada usuario en el diccionario se fija si hacen match. si hay, mete a ese usuario y sus datos (values) en otro diccionario 'dicc_matches'
@@ -255,6 +255,8 @@ def findMatch(dicc_usuarios, lista_busqueda):       ###le das el diccionario con
         if (edad_min <= dicc_usuarios[usuario][4] <= edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[1][2]):
             datos = dicc_usuarios[usuario]
             dicc_matches.update({usuario:datos})
+    if lista_busqueda[0] in dicc_matches:
+        del dicc_matches[lista_busqueda[0]]
     if dicc_matches == {}:
         print("No hubo ningun match. Estas destinadx a morir solx :(")
         time.sleep(2)
@@ -264,13 +266,14 @@ def findMatch(dicc_usuarios, lista_busqueda):       ###le das el diccionario con
 def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los usarios matcehados y el porcentaje de match de cada uno.
     for match in dicc_matches:
         intereses_match = dicc_matches[match][-1]
-        intereses_usuario = lista_busqueda[-1]
+        intereses_usuario = lista_busqueda[-1][-1]
         total = len(intereses_match) + len(intereses_usuario)
         comun = 0
         for interest in intereses_usuario:      ###se fija si cada interes del usuario esta en los intereses del match
             if interest in intereses_match:
                 comun += 1
-        porcentaje = 100 * 2 / total
+        #porcentaje = 100 * 2 * comun / total       mas parecida a la consigna pero que funciona + o -
+        porcentaje = 100 * comun / len(intereses_usuario)
         porcentaje = round(porcentaje)
         nombre = dicc_matches[match][1]
         apellido = dicc_matches[match][2]
