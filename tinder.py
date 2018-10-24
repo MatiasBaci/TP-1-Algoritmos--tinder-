@@ -277,6 +277,7 @@ def porcentaje_match(dicc_matches, lista_busqueda):      ### debe mostrar los us
         print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))    ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
         time.sleep(1)
     if dicc_matches:
+        time.sleep(2)
         print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
         time.sleep(5)
         print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
