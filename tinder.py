@@ -32,26 +32,26 @@ def registro(diccionario_usuarios):
     edad = age()
     ubicacion = location()
     intereses = interests()
-    diccionario_usuarios[pseudonimo] = {"contraseña":contraseña, "nombre":nombre, "apellido":apellido, "sexo":sexo, "edad":edad, "ubicacion":ubicacion, "intereses":intereses}
+    diccionario_usuarios[pseudonimo] = {"contraseña": contraseña, "nombre": nombre, "apellido": apellido, "sexo": sexo, "edad": edad, "ubicacion": ubicacion, "intereses": intereses}
     return diccionario_usuarios
 
 
 def nuevo_pseudonimo(dicc_usuarios):
-    enProceso = True
-    while enProceso:        ###para ver si el proceso de elegir pseudonimo esta terminado o en proceso
+    en_proceso = True
+    while en_proceso:        ###para ver si el proceso de elegir pseudonimo esta terminado o en proceso
         pseudonimo = input("Ingrese su pseudonimo, compuesto unicamente de minusculas, numeros y guiones bajos\n>")
         if pseudonimo in dicc_usuarios:
             print("El pseudónimo elegido ya esta en uso. Por favor eliga otro")
             time.sleep(2)
-        elif not esValidoPseudonimo(pseudonimo):        #Entra a esta parte si el pseudonimo no es valido
+        elif not es_valido_pseudonimo(pseudonimo):        #Entra a esta parte si el pseudonimo no es valido
             print("El pseudónimo solo puede contener minusculas, números y guiones bajos '_'")
             time.sleep(2)
         else:
-            enProceso = False
+            en_proceso = False
     return pseudonimo
 
 
-def esValidoPseudonimo(string_de_caracteres):           #Chequea que el pseudonimo no contenga caracteres no permitidos
+def es_valido_pseudonimo(string_de_caracteres):           #Chequea que el pseudonimo no contenga caracteres no permitidos
     caracteres_permitidos = (*"abcdefghijklmnopqrstuvwxyz1234567890_",)         #Tupla conteniendo los carateres permitidos en forma empaquetada
     for caracter in string_de_caracteres:
         if caracter not in caracteres_permitidos:
@@ -144,7 +144,7 @@ def location():
             print("Oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
             time.sleep(2)
         else:
-            if (-90 <= latitud <= 90):
+            if -90 <= latitud <= 90:
                 lat_valido = True
             else:
                 print("Te equivocaste, no pasa nada. Latitud debe estar entre -90 y 90")
@@ -156,7 +156,7 @@ def location():
             print("Oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
             time.sleep(2)
         else:
-            if (-180 <= longitud <= 180):
+            if -180 <= longitud <= 180:
                 lon_valido = True
             else:
                 print("Todos cometemos errores. Longitud debe estar entre -180 y 180")
@@ -196,31 +196,31 @@ def es_valido_interes(interes, intereses):
 
 
 def ingresar(dicc):
-    usuarioValido = False
+    usuario_valido = False
     salir = False
     respuesta = "1"
-    while not usuarioValido and not salir:
+    while not usuario_valido and not salir:
         pseudonimo = input("Ingrese su nombre de usuario (pseudonimo)\n>")
-        usuarioValido = True
+        usuario_valido = True
         if pseudonimo not in dicc:
             print("Usuario equivocado. Inténtelo de nuevo")
             time.sleep(1)
-            usuarioValido = False
+            usuario_valido = False
             respuesta = input("Desea continuar? (0 para salir, cualquier cosa para continuar\n>")
         if respuesta == "0":
             salir = True
-    contraseñaValida = False
-    while not contraseñaValida and not salir:
+    contraseña_valida = False
+    while not contraseña_valida and not salir:
         contraseña = input("Ingrese su contraseña\n>")
         if contraseña == dicc[pseudonimo]["contraseña"]:
-            contraseñaValida = True
+            contraseña_valida = True
         else:
             print("Contraseña inválida")
             time.sleep(1)
             respuesta = input("Desea continuar? (0 o 'salir' para salir, cualquier otra cosa para continuar)\n>")
         if respuesta == "0" or respuesta == "salir":
             salir = True
-    if usuarioValido and contraseñaValida:
+    if usuario_valido and contraseña_valida:
         return pseudonimo, True
     return None, False
 
@@ -238,22 +238,22 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
     time.sleep(0.5)
     edad_max = age()
     rango_distancia = float(input("Rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros, puede ser decimal\n>"))
-    dicc_busqueda = {"pseudonimo":pseudonimo, "sexo_buscar":sexo_buscar, "rango_edad":(edad_min, edad_max), "rango_distancia_":rango_distancia}
+    dicc_busqueda = {"pseudonimo": pseudonimo, "sexo_buscar": sexo_buscar, "rango_edad": (edad_min, edad_max), "rango_distancia": rango_distancia}
     return dicc_busqueda
 
-                            ###este no lo termine
-def findMatch(dicc_usuarios, dicc_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
-    info_usuario = dicc_usuarios[lista_busqueda[0]]     #quita al usuario en sesion del diccionario y devuelve su informacion (value correspondiente a esa key) a info_usuaario.
-    lista_busqueda.append(info_usuario)
+
+def find_match(dicc_usuarios, dicc_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
+    info_usuario = dicc_usuarios[dicc_busqueda["pseudonimo"]]     #devuelve la info del usuario (value correspondiente a esa key) a info_usuario.
+    dicc_busqueda.append(info_usuario)  ###tiene que ser .update
     dicc_matches = {}
     for usuario in dicc_usuarios:           #por cada usuario en el diccionario se fija si hacen match. si hay, mete a ese usuario y sus datos (values) en otro diccionario 'dicc_matches'
-        edad_min = lista_busqueda[1][1][0]
-        edad_max = lista_busqueda[1][1][1]
-        sexo_interesado = lista_busqueda[1][0]
-        distancia_al_usuario = geodesic(dicc_usuarios[usuario][5], info_usuario[5]).kilometers    #VOLVER A PONER CUANDO SE SOLUCIONE GEOPY
-        if (edad_min <= dicc_usuarios[usuario][4] <= edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[1][2]):
+        edad_min = dicc_busqueda["rango_edad"][0]
+        edad_max = dicc_busqueda["rango_edad"][1]
+        sexo_interesado = dicc_busqueda["sexo_buscar"]
+        distancia_al_usuario = geodesic(dicc_usuarios[usuario][5], info_usuario[5]).kilometers
+        if (edad_min <= dicc_usuarios[usuario][4] <= edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= dicc_busqueda["rango_distancia"]):
             datos = dicc_usuarios[usuario]
-            dicc_matches.update({usuario:datos})
+            dicc_matches.update({usuario: datos})
     if lista_busqueda[0] in dicc_matches:
         del dicc_matches[lista_busqueda[0]]
     if dicc_matches == {}:
@@ -316,7 +316,7 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
         if valido:
             #lista_busqueda = busqueda(diccionario_usuarios)
             lista_busqueda = busqueda(pseudonimoIngresado)
-            dicc_matches, lista_busqueda = findMatch(diccionario_usuarios, lista_busqueda)
+            dicc_matches, lista_busqueda = find_match(diccionario_usuarios, lista_busqueda)
             porcentaje_match(dicc_matches, lista_busqueda)
         opcion_usuario = "0"
     elif opcion_usuario == "4":
@@ -324,6 +324,6 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
         time.sleep(3)
         opcion_usuario = "0"
     elif opcion_usuario == "5":     ###pongo elif por las dudas, cambiar luego de testear mucho
-        print("Chau hermose <3")
+        print("Chau hermosx <3")
         time.sleep(3)
         exit()
