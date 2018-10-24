@@ -19,7 +19,10 @@ def menu_principal():
         #time.sleep(1)
         #print("No, mentira.")
         #time.sleep(1)
-        user_input = input("Entrada no válida. Por favor, elija una de las opciones indicadas\n>")
+        if user_input == "salir":
+            user_input = "5"
+        else:
+            user_input = input("Entrada no válida. Por favor, elija una de las opciones indicadas\n>")
     return user_input
 
 
@@ -32,7 +35,7 @@ def registro(diccionario_usuarios):
     edad = age()
     ubicacion = location()
     intereses = interests()
-    likes = {}
+    likes = []
     mensajes = {}
     diccionario_usuarios[pseudonimo] = {"contraseña": contraseña, "nombre": nombre, "apellido": apellido, "sexo": sexo, "edad": edad, "ubicacion": ubicacion, "intereses": intereses, "likes": likes, "mensajes": mensajes}
     return diccionario_usuarios
@@ -264,12 +267,20 @@ def find_match(dicc_usuarios, dicc_busqueda):       ###le das el diccionario con
     return dicc_matches, dicc_busqueda
 
 
-def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      ### debe mostrar los usarios matcehados y el porcentaje de match de cada uno.
+def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      #muestra los usarios matcehados y el porcentaje de match de cada uno.
+    pseudonimo = dicc_busqueda["pseudonimo"]
+    print("En base a tus gustos, te mostraremos tu porcentaje de exito en una relacion con cada persona que encontramos.")
+    time.sleep(3)
+    print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
+    time.sleep(3)
+    print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
+    time.sleep(3)
+    input("Presiona Enter para continuar")
     for match in dicc_matches:
         lista_intereses_match = dicc_matches[match]["intereses"]
-        lista_intereses_usuario = dicc_usuarios[dicc_busqueda["pseudonimo"]]["intereses"]
+        lista_intereses_usuario = dicc_usuarios[pseudonimo]["intereses"]
         comun = 0
-        for interest in lista_intereses_usuario:      ###se fija cuantos intereses del usuario estan en los intereses del match
+        for interest in lista_intereses_usuario:      #se fija cuantos intereses del usuario estan en los intereses del match
             if interest in lista_intereses_match:
                 comun += 1
         #total = len(lista_intereses_match) + len(lista_intereses_usuario)
@@ -280,30 +291,32 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      ### debe 
         apellido = dicc_matches[match]["apellido"]
         print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))    ###aca deberiamos hacer que pregunte si quiere mandar un mensaje si fueron matcheados ambos
         time.sleep(1)
-        respuesta = input("like/hate ?").lower
-        if respuesta == "like":
-            dicc_usuarios[match]["likes"].append("{}".format(dicc_usuarios[dicc_busqueda["pseudonimo"]]))
-            print("Le dejaste un like a {}".format(match))
+        respuesta = input("like/hate ?\n>").lower   #si el usuario quiere dejar like, y mensaje
+        time.sleep(1)
+        while respuesta != "like" and respuesta != "hate":
+            respuesta = input("Respuesta no valida. Like/hate ?\n>").lower()
             time.sleep(1)
-            if tiene_like:
-                respuesta = input("{} ya te habia dejado un like a vos. ¿Queres dejar un mensaje? s/n".format(match)).lower()
-                if respuesta == "s":
-                    dejar_mensaje()
-                    
-    if dicc_matches:
-        time.sleep(2)
-        print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
-        time.sleep(5)
-        print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
-        time.sleep(5)
+        if respuesta == "like":
+            dicc_usuarios[match]["likes"].append("{}".format(pseudonimo))
+            print("Le dejaste un like a {}".format(nombre))
+            time.sleep(1)
+            if dicc_usuarios[pseudonimo] in dicc_usuarios[match]["likes"]:
+                respuesta = input("{} ya te habia dejado un like a vos. ¿Queres dejar un mensaje? s/n\n>".format(nombre)).lower
+                if respuesta == "s" or respuesta == "si":
+                    mensaje = input("Escribi tu mensaje.\n>")
+                    #dicc_usuarios[match]["mensajes"]{pseudonimo} = mensaje
+                    #print("Mensaje enviado.")
+                    print("El mensaje no se pudo enviar :(")
+                    time.sleep(1)
 
 
-def like_msg():
+#def like_msg():
 
 
 def ver_mensajes(pseudonimo, dicc_usuarios):
     if dicc_usuarios[pseudonimo]["mensajes"]:
-        for mensaje in dicc_usuarios[pseudonimo]["mensajes"]:
+        for persona_que_mando_msg in dicc_usuarios[pseudonimo]["mensajes"]:
+            mensaje = dicc_usuarios[pseudonimo]["mensajes"][persona_que_mando_msg]
             print("{} dice: {}".format(persona_que_mando_msg, mensaje))
             time.sleep(3)
     else:
@@ -315,8 +328,8 @@ def ver_mensajes(pseudonimo, dicc_usuarios):
 #Bloque principal
 
 print("Bienvenide a la version python de tinder! >w< <3")
-dicc_usuarios = {}           ###aca van a ir todos los usuarios. los cargados y los nuevos
-diccionario_usuarios_nuevos = {}    ###aca solo van a estar los usuarios nuevos
+dicc_usuarios = {}           #aca van a ir todos los usuarios. los cargados y los nuevos
+#diccionario_usuarios_nuevos = {}    #aca solo van a estar los usuarios nuevos
 opcion_usuario = "0"
 datos_ya_cargados = False
 while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun la opcion elegida
@@ -342,16 +355,27 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
         if valido:
             respuesta = ""
             while respuesta != "salir":
-                respuesta = input("Quiere ver sus mensajes? s/n/salir").lower()
+                respuesta = input("Queres ver tus mensajes? s/n/salir\n>").lower()
                 if respuesta == "s":
                     ver_mensajes(pseudonimo_ingresado, dicc_usuarios)
                     respuesta = "n"
+                elif respuesta != "n" and respuesta != "salir":
+                    print("Tomo eso como un 'no'.")
+                    time.sleep(1)
+                    respuesta = "salir"
                 if respuesta != "salir":
-                    respuesta = input("Quiere buscar su alma gemela? s/n/salir").lower()
+                    respuesta = input("Queres buscar tu alma gemela? s/n/salir\n>").lower()
                     if respuesta == "s":
                         dicc_busqueda = busqueda(pseudonimo_ingresado)
                         dicc_matches, dicc_busqueda = find_match(dicc_usuarios, dicc_busqueda)
-                        porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios)
+                        if dicc_matches:
+                            porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios)
+                    elif respuesta == "n":
+                        respuesta = "salir"
+                    elif respuesta != "salir":
+                        print("Tomo eso como un 'no'.")
+                        time.sleep(1)
+                        respuesta = "salir"
         opcion_usuario = "0"
     elif opcion_usuario == "4":
         print("Editar? No hay presupuesto para tantas funcionalidades.")
