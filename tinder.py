@@ -1,9 +1,7 @@
 ###uso 3 numeral (###) para cuando el mensaje es para nosotros
 ###uso 1 numeral (#) para cuando el mensaje es para los profes
 
-from datos_prueba import cargar_datos_prueba
-from geopy.distance import geodesic
-import time
+
 
 
 def menu_principal():
@@ -88,7 +86,6 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
                 if valido == "No se" and len(santo_y_seña) == i + 1:
                     valido = "Si"
     return santo_y_seña
-
 
 
 def sex():      ###permitir que busque varios sexos
