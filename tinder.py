@@ -4,7 +4,6 @@
 import time
 from geopy.distance import geodesic
 from datos_prueba import cargar_datos_prueba
-import math
 
 
 def menu_principal():
