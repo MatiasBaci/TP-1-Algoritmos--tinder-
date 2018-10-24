@@ -220,8 +220,10 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
     time.sleep(1)
     #rango_edad = age()
     print("Edad minima de busqueda\n")
+    time.sleep(0.5)
     edad_min = age()
     print("Edad maxima de busqueda\n")
+    time.sleep(0.5)
     edad_max = age()
     rango_distancia = float(input("Rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros, puede ser decimal\n>"))
     lista = [pseudonimo, [sexo_buscar, (edad_min, edad_max), rango_distancia]]
@@ -236,10 +238,9 @@ def findMatch(dicc_usuarios, lista_busqueda):       ###le das el diccionario con
         edad_min = lista_busqueda[1][1][0]
         edad_max = lista_busqueda[1][1][1]
         sexo_interesado = lista_busqueda[1][0]
-        #distancia_al_usuario = geodesic(dicc_usuarios[usuario][5], info_usuario[5])    #VOLVER A PONER CUANDO SE SOLUCIONE GEOPY
-        distancia_al_usuario = lista_busqueda[1][2] ###PROVISORIO, REMOVER AL SOLUCIONAR GEOPY
+        distancia_al_usuario = geodesic(dicc_usuarios[usuario][5], info_usuario[5]).kilometers    #VOLVER A PONER CUANDO SE SOLUCIONE GEOPY
+        #distancia_al_usuario = lista_busqueda[1][2] ###PROVISORIO, REMOVER AL SOLUCIONAR GEOPY
         if (edad_min <= dicc_usuarios[usuario][4] <= edad_max) and (dicc_usuarios[usuario][3] == sexo_interesado) and (distancia_al_usuario <= lista_busqueda[1][2]):
-            #datos = dicc_usuarios.pop(usuario)
             datos = dicc_usuarios[usuario]
             dicc_matches.update({usuario:datos})
     if dicc_matches == {}:
