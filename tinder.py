@@ -1,5 +1,5 @@
-###uso 3 numeral (###) para cuando el mensaje es para nosotros
-###uso 1 numeral (#) para cuando el mensaje es para los profes
+# ##uso 3 numeral (###) para cuando el mensaje es para nosotros
+# ##uso 1 numeral (#) para cuando el mensaje es para los profes
 
 import time
 from geopy.distance import geodesic
@@ -13,12 +13,12 @@ def menu_principal():
     print("3: Ingresar al sistema")
     print("4: Editar usuario existente")
     print("5: Salir")
-    user_input = input("Elegi una de las opciones para proseguir\n>")  #guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
-    while user_input not in (*"12345",):     #tupla conteniendo las opciones empaquetadas. verifica que el usuario no ingrese entradas no permitidas
-        #print("\033[1;31;40m FATAL ERROR!!1!\n")
-        #time.sleep(1)
-        #print("No, mentira.")
-        #time.sleep(1)
+    user_input = input("Elegi una de las opciones para proseguir\n>")  # guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
+    while user_input not in (*"12345",):     # tupla conteniendo las opciones empaquetadas. verifica que el usuario no ingrese entradas no permitidas
+        # print("\033[1;31;40m FATAL ERROR!!1!\n")
+        # time.sleep(1)
+        # print("No, mentira.")
+        # time.sleep(1)
         if user_input == "salir":
             user_input = "5"
         else:
@@ -43,12 +43,12 @@ def registro(diccionario_usuarios):
 
 def nuevo_pseudonimo(dicc_usuarios):
     en_proceso = True
-    while en_proceso:        ###para ver si el proceso de elegir pseudonimo esta terminado o en proceso
+    while en_proceso:        # ##para ver si el proceso de elegir pseudonimo esta terminado o en proceso
         pseudonimo = input("Ingresa tu pseudonimo, compuesto unicamente de minusculas, numeros y guiones bajos\n>")
         if pseudonimo in dicc_usuarios:
             print("El pseudónimo elegido ya esta en uso. Elegi otro")
             time.sleep(2)
-        elif not es_valido_pseudonimo(pseudonimo):        #Entra a esta parte si el pseudonimo no es valido
+        elif not es_valido_pseudonimo(pseudonimo):        # Entra a esta parte si el pseudonimo no es valido
             print("El pseudónimo solo puede contener minusculas, números y guiones bajos '_'")
             time.sleep(2)
         else:
@@ -56,15 +56,15 @@ def nuevo_pseudonimo(dicc_usuarios):
     return pseudonimo
 
 
-def es_valido_pseudonimo(string_de_caracteres):           #Chequea que el pseudonimo no contenga caracteres no permitidos
-    caracteres_permitidos = (*"abcdefghijklmnopqrstuvwxyz1234567890_",)         #Tupla conteniendo los carateres permitidos en forma empaquetada
+def es_valido_pseudonimo(string_de_caracteres):           # Chequea que el pseudonimo no contenga caracteres no permitidos
+    caracteres_permitidos = (*"abcdefghijklmnopqrstuvwxyz1234567890_",)         # Tupla conteniendo los carateres permitidos en forma empaquetada
     for caracter in string_de_caracteres:
         if caracter not in caracteres_permitidos:
             return False
     return True
 
 
-def password():                     ###perdon si es confuso, ni yo la entiendo
+def password():                     # ##perdon si es confuso, ni yo la entiendo
     mayuscula = False
     tupla_mayusculas = (*"ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",)
     minuscula = False
@@ -83,7 +83,7 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
                 i += 1
                 if santo_y_seña[i] not in tupla_mayusculas:
                     if santo_y_seña[i] not in tupla_minusculas:
-                        if santo_y_seña[i] not in tupla_numeros:                      ###es como 3D OOoo..ooOOoo.. whoa
+                        if santo_y_seña[i] not in tupla_numeros:                      # ##es como 3D OOoo..ooOOoo.. whoa
                             valido = "No"
                             numero = False
                             print("Caracter(es) invalido(s)")
@@ -101,10 +101,9 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
 
 def sex_registro():
     sexo_valido = False
-    ##salir = False
     caracteres_permitidos = ("h", "m", "i", "hombre", "mujer", "indefinido")
-    while not sexo_valido: ##or not salir:
-        sexo = input("Ingresa tu sexo\n'h' hombre\n'm' mujer\n'i' indefinido\n>").lower()      #'s' salir
+    while not sexo_valido:
+        sexo = input("Ingresa tu sexo\n'h' hombre\n'm' mujer\n'i' indefinido\n>").lower()
         if sexo in caracteres_permitidos:
             sexo_valido = True
         else:
@@ -141,12 +140,12 @@ def sex_busqueda():
     return lista_sexos
 
 
-def age(instancia):      #instancia indica si se esta registrando o esta buscando un match
+def age(instancia):      # instancia indica si se esta registrando o esta buscando un match
     invalido = True
     while invalido:
         invalido = False
         edad = input("Ingresa edad\n>")
-        if len(edad) > 2 or edad == '':       ###es para que la funcion no compare caracter por caracter si es que son muchos, porque ya es invalido
+        if len(edad) > 2 or edad == '':       # ##es para que la funcion no compare caracter por caracter si es que son muchos, porque ya es invalido
             invalido = True
         else:
             for caracter in edad:
@@ -221,9 +220,9 @@ def es_valido_interes(interes, intereses):
     if interes == '':
         return False
     for caracter in interes:
-        if caracter not in caracteres_validos:  #se fija que sea valido
+        if caracter not in caracteres_validos:  # se fija que sea valido
             return False
-    if interes in intereses:    #se fija que no este repetido
+    if interes in intereses:    # se fija que no este repetido
         return False
     return True
 
@@ -258,7 +257,7 @@ def ingresar(dicc):
     return None, False
 
 
-def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en un diccionario
+def busqueda(pseudonimo):       # ## devuelve los datos para hacer la busqueda en un diccionario
     print("Sexo(s) en el que esta interesade\nEjemplo: 'mh' busca mujer y hombre.")
     time.sleep(1)
     lista_sexos = sex_busqueda()
@@ -279,12 +278,12 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
     return dicc_busqueda
 
 
-def find_match(dicc_usuarios, dicc_busqueda):       ###le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
-        #dicc_usuarios es el diccionario con todos los usuarios
-        #dicc_busqueda tiene el pseudonimo del usuario actual y sus parametros de busqueda
+def find_match(dicc_usuarios, dicc_busqueda):       # ##le das el diccionario con el usuario que esta buscando un match y sus preferencias (rango edades, sexo y rango distancia)
+        # dicc_usuarios es el diccionario con todos los usuarios
+        # dicc_busqueda tiene el pseudonimo del usuario actual y sus parametros de busqueda
     dicc_matches = {}
     for cada_sexo in dicc_busqueda["sexo_buscar"]:
-        for usuario in dicc_usuarios:           #por cada usuario en el diccionario se fija si hacen match. si hay, mete a ese usuario y sus datos (values) en otro diccionario 'dicc_matches'
+        for usuario in dicc_usuarios:           # por cada usuario en el diccionario se fija si hacen match. si hay, mete a ese usuario y sus datos (values) en otro diccionario 'dicc_matches'
             edad_min = dicc_busqueda["rango_edad"][0]
             edad_max = dicc_busqueda["rango_edad"][1]
             numero_de_sexo = dicc_busqueda["sexo_buscar"].index(cada_sexo)
@@ -293,7 +292,7 @@ def find_match(dicc_usuarios, dicc_busqueda):       ###le das el diccionario con
             if (edad_min <= dicc_usuarios[usuario]["edad"] <= edad_max) and (dicc_usuarios[usuario]["sexo"] == sexo_interesado) and (distancia_al_usuario <= dicc_busqueda["rango_distancia"]):
                 datos = dicc_usuarios[usuario]
                 dicc_matches.update({usuario: datos})
-    if dicc_busqueda["pseudonimo"] in dicc_matches: #si el usuario que esta buscando ahora se encuentra en sus propios matches lo quita
+    if dicc_busqueda["pseudonimo"] in dicc_matches: # si el usuario que esta buscando ahora se encuentra en sus propios matches lo quita
         del dicc_matches[dicc_busqueda["pseudonimo"]]
     if dicc_matches == {}:
         print("No hubo ningun match. Estas destinadx a morir solx :(")
@@ -301,7 +300,7 @@ def find_match(dicc_usuarios, dicc_busqueda):       ###le das el diccionario con
     return dicc_matches, dicc_busqueda
 
 
-def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      #muestra los usarios matcehados y el porcentaje de match de cada uno.
+def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      # muestra los usarios matcehados y el porcentaje de match de cada uno.
     pseudonimo = dicc_busqueda["pseudonimo"]
     print("En base a tus gustos, te mostraremos tu porcentaje de exito en una relacion con cada persona que encontramos.")
     time.sleep(3)
@@ -316,19 +315,19 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      #muestra 
             lista_intereses_match = dicc_matches[match]["intereses"]
             lista_intereses_usuario = dicc_usuarios[pseudonimo]["intereses"]
             comun = 0
-            for interest in lista_intereses_usuario:      #se fija cuantos intereses del usuario estan en los intereses del match
+            for interest in lista_intereses_usuario:      # se fija cuantos intereses del usuario estan en los intereses del match
                 if interest in lista_intereses_match:
                     comun += 1
-            #total = len(lista_intereses_match) + len(lista_intereses_usuario)
-            #porcentaje = 100 * 2 * comun / total       mas parecida a la consigna pero que funciona + o -
+            # total = len(lista_intereses_match) + len(lista_intereses_usuario)
+            # porcentaje = 100 * 2 * comun / total       mas parecida a la consigna pero que funciona + o -
             porcentaje = 100 * comun / len(lista_intereses_usuario)
             porcentaje = round(porcentaje)
             nombre = dicc_matches[match]["nombre"]
             apellido = dicc_matches[match]["apellido"]
             print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))
             time.sleep(1)
-            respuesta = input("like/hate ?\n>").lower   #si el usuario quiere dejar like, y mensaje
-            ###por alguna razon la primera vez siempre entra al while, sin importar lo que pongas
+            respuesta = input("like/hate ?\n>").lower   # si el usuario quiere dejar like, y mensaje
+            # ##por alguna razon la primera vez siempre entra al while, sin importar lo que pongas
             time.sleep(0.5)
             while respuesta != "like" and respuesta != "hate":
                 respuesta = input("Respuesta no valida. Like/hate ?\n>").lower()
@@ -341,12 +340,13 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      #muestra 
                     respuesta = input("{} ya te habia dejado un like a vos. ¿Queres dejar un mensaje? s/n\n>".format(nombre)).lower
                     if respuesta == "s" or respuesta == "si":
                         print("Solo podes dejar un mensaje. Usalo bien.")
-                        time.sleep(1)
+                        time.sleep(0.5)
                         mensaje = input("Escribi tu mensaje.\n>")
-                        #dicc_usuarios[match]["mensajes"]{pseudonimo} = mensaje
-                        #print("Mensaje enviado.")
+                        time.sleep(0.5)
+                        # dicc_usuarios[match]["mensajes"]{pseudonimo} = mensaje
+                        # print("Mensaje enviado.")
                         print("El mensaje no se pudo enviar porque no hay internet.")
-                        time.sleep(1)
+                        time.sleep(0.5)
             respuesta = input("Continuar? s/n\n>").lower()
             if respuesta == "n" or respuesta == "no":
                 salir = True
@@ -367,16 +367,18 @@ def ver_mensajes(pseudonimo, dicc_usuarios):
         print("Ok, miento. Nadie te dejo nada.")
         time.sleep(2)
 
-#Bloque principal
+
+# Bloque principal
+
 
 print("Bienvenide a la version python de tinder! >w< <3")
-dicc_usuarios = {}           #aca van a ir todos los usuarios. los cargados y los nuevos
-#diccionario_usuarios_nuevos = {}    #aca solo van a estar los usuarios nuevos
+dicc_usuarios = {}           # aca van a ir todos los usuarios. los cargados y los nuevos
+# diccionario_usuarios_nuevos = {}    # aca solo van a estar los usuarios nuevos
 opcion_usuario = "0"
 datos_ya_cargados = False
-while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun la opcion elegida
+while opcion_usuario == "0":       # ciclo que ejecuta la funcion adecuada segun la opcion elegida
     opcion_usuario = menu_principal()
-    if opcion_usuario == "1":       #carga los datos del otro archivo si es que no se hizo antes
+    if opcion_usuario == "1":       # carga los datos del otro archivo si es que no se hizo antes
         if not datos_ya_cargados:
             dicc_usuarios_prueba = cargar_datos_prueba()
             dicc_usuarios.update(dicc_usuarios_prueba)
@@ -423,7 +425,7 @@ while opcion_usuario == "0":       #ciclo que ejecuta la funcion adecuada segun 
         print("Editar? No hay presupuesto para tantas funcionalidades.")
         time.sleep(3)
         opcion_usuario = "0"
-    elif opcion_usuario == "5":     ###pongo elif por las dudas, cambiar luego de testear mucho
+    elif opcion_usuario == "5":     # ##pongo elif por las dudas, cambiar luego de testear mucho
         print("Chau hermosx <3")
         time.sleep(3)
         exit()
