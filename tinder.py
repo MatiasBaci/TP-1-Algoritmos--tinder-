@@ -319,11 +319,11 @@ def find_match(dicc_usuarios, dicc_busqueda):       # ##le das el diccionario co
 def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      # muestra los usarios matcehados y el porcentaje de match de cada uno.
     pseudonimo = dicc_busqueda["pseudonimo"]
     print("En base a tus gustos, te mostraremos tu porcentaje de exito en una relacion con cada persona que encontramos.")
-    time.sleep(3)
+    time.sleep(0.5)
     print("Este porcentaje es completamente eficaz y para nada arbitrario a la hora de juzgar cuanto se parecen dos personas.")
-    time.sleep(3)
+    time.sleep(0.5)
     print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
-    time.sleep(3)
+    time.sleep(0.5)
     input("Presiona Enter para continuar")
     salir = False
 
@@ -336,7 +336,7 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      # muestra
                 if interest in lista_intereses_match:
                     comun += 1
             # total = len(lista_intereses_match) + len(lista_intereses_usuario)
-            # porcentaje = 100 * 2 * comun / total       mas parecida a la consigna pero que funciona + o -
+            # porcentaje = 100 * comun / total       asi es segun la consigna pero este no permite que el porcentaje sea 100%
             porcentaje = 100 * comun / len(lista_intereses_usuario)
             porcentaje = round(porcentaje)
             nombre = dicc_matches[match]["nombre"]
