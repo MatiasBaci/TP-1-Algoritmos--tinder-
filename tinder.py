@@ -329,14 +329,14 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      #muestra 
             time.sleep(1)
             respuesta = input("like/hate ?\n>").lower   #si el usuario quiere dejar like, y mensaje
             ###por alguna razon la primera vez siempre entra al while, sin importar lo que pongas
-            time.sleep(1)
+            time.sleep(0.5)
             while respuesta != "like" and respuesta != "hate":
                 respuesta = input("Respuesta no valida. Like/hate ?\n>").lower()
-                time.sleep(1)
+                time.sleep(0.5)
             if respuesta == "like":
                 dicc_usuarios[match]["likes"].append("{}".format(pseudonimo))
                 print("Le dejaste un like a {}".format(nombre))
-                time.sleep(1)
+                time.sleep(0.5)
                 if dicc_usuarios[pseudonimo] in dicc_usuarios[match]["likes"]:
                     respuesta = input("{} ya te habia dejado un like a vos. ¿Queres dejar un mensaje? s/n\n>".format(nombre)).lower
                     if respuesta == "s" or respuesta == "si":
@@ -350,6 +350,9 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      #muestra 
             respuesta = input("Continuar? s/n\n>").lower()
             if respuesta == "n" or respuesta == "no":
                 salir = True
+            elif respuesta != "s" and respuesta != "si":
+                print("Tomo eso como un 'si'.")
+                time.sleep(0.5)
 
 
 def ver_mensajes(pseudonimo, dicc_usuarios):
