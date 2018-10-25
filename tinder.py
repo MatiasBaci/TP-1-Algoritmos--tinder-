@@ -287,7 +287,8 @@ def find_match(dicc_usuarios, dicc_busqueda):       ###le das el diccionario con
         for usuario in dicc_usuarios:           #por cada usuario en el diccionario se fija si hacen match. si hay, mete a ese usuario y sus datos (values) en otro diccionario 'dicc_matches'
             edad_min = dicc_busqueda["rango_edad"][0]
             edad_max = dicc_busqueda["rango_edad"][1]
-            sexo_interesado = dicc_busqueda["sexo_buscar"][cada_sexo]
+            numero_de_sexo = dicc_busqueda["sexo_buscar"].index(cada_sexo)
+            sexo_interesado = dicc_busqueda["sexo_buscar"][numero_de_sexo]
             distancia_al_usuario = geodesic(dicc_usuarios[usuario]["ubicacion"], dicc_usuarios[dicc_busqueda["pseudonimo"]]["ubicacion"]).kilometers
             if (edad_min <= dicc_usuarios[usuario]["edad"] <= edad_max) and (dicc_usuarios[usuario]["sexo"] == sexo_interesado) and (distancia_al_usuario <= dicc_busqueda["rango_distancia"]):
                 datos = dicc_usuarios[usuario]
