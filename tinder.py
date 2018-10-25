@@ -38,7 +38,7 @@ def registro(diccionario_usuarios):
     likes = []
     mensajes = {}
     diccionario_usuarios[pseudonimo] = {"contraseña": contraseña, "nombre": nombre, "apellido": apellido, "sexo": sexo, "edad": edad, "ubicacion": ubicacion, "intereses": intereses, "likes": likes, "mensajes": mensajes}
-    return diccionario_usuarios
+    #return diccionario_usuarios
 
 
 def nuevo_pseudonimo(dicc_usuarios):
@@ -141,34 +141,41 @@ def sex_busqueda():
 
 
 def age(instancia):      # instancia indica si se esta registrando o esta buscando un match
-    invalido = True
-    while invalido:
-        invalido = False
-        edad = input("Ingresa edad\n>")
-        if len(edad) > 2 or edad == '':       # ##es para que la funcion no compare caracter por caracter si es que son muchos, porque ya es invalido
-            invalido = True
-        else:
-            for caracter in edad:
-                if caracter not in (*"0123456789",):
-                    invalido = True
-        if not invalido and int(edad) < 18:
-            if instancia == "busqueda":
-                if int(edad) < 3:
-                    print("Quizas no quedo claro. Este servicio es para conocer gente, no para adoptar bebes.")
-                else:
-                    print("La policia ha sido notificada. Un patrullero esta en camino.")
+    edad_valida = False
+    while not edad_valida:
+        valido = False
+        while not valido:
+            edad = input("Ingresa edad\n>")
+            try:
+                edad = int(edad)
+            except (TypeError, ValueError):
+                valido = False
+                print("Edad invalida. Debe ser un numero entre 18 y 99.")
             else:
-                if int(edad) == 0:
-                    print("¿No naciste? No estarias usando el programa entonces.")
-                else:
-                    print("Tenes que ser mayor de edad. No nos metas en problemas.")
-            invalido = True
-            time.sleep(2)
-        elif not invalido and int(edad) > 99:
-            print("Edad invalida. Debe ser un numero entre 18 y 99.")
-            invalido = True
-            time.sleep(2)
-    return int(edad)
+                valido = True
+        if instancia == "busqueda":
+            if 18 <= edad <= 99:
+                edad_valida = True
+            elif 0 < edad < 18:
+                print("Tiene que ser mayor de edad. No nos metas en problemas.")
+            elif edad > 99:
+                print("OwO what's this? (muy viejo para tinder)")
+            else:
+                print("Edad invalida. Debe ser un numero entre 18 y 99.")
+        else:
+            if 18 <= edad <= 99:
+                edad_valida = True
+            elif 0 < edad < 18:
+                print("Tenes que ser mayor de edad. No nos metas en problemas.")
+            elif edad > 99:
+                print("OwO what's this? (muy viejo para tinder)")
+            else:
+                print("Edad invalida. Debe ser un numero entre 18 y 99.")
+    time.sleep(0.5)
+    return edad
+
+                    ###print("Quizas no quedo claro. Este servicio es para conocer gente, no para adoptar bebes.")
+                    ###print("La policia ha sido notificada. Un patrullero esta en camino.")
 
 
 def location():
@@ -176,7 +183,7 @@ def location():
     while not lat_valido:
         try:
             latitud = float(input("Ingrese su latitud\n>").replace(",", "."))
-        except TypeError:
+        except (TypeError,ValueError):
             print("Oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
             time.sleep(2)
         else:
@@ -188,7 +195,7 @@ def location():
     while not lon_valido:
         try:
             longitud = float(input("Ingrese su longitud\n>"))
-        except TypeError:
+        except (TypeError,ValueError):
             print("Oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
             time.sleep(2)
         else:
@@ -206,7 +213,9 @@ def interests():
     while otro_mas:
         interes = input("Ingresa un interes, '0' (cero) para salir (consideramos que 'salir' es un interes valido).\n>").lower().strip()
         interes = interes.replace(" ", "-")
-        if interes != "0":
+        if interes == "":
+            print("Debes ingresar algo o 0 para salir")
+        elif interes != "0":
             if es_valido_interes(interes, intereses):
                 intereses.append(interes)
                 print("{} ha sido agregado a tus intereses".format(interes))
@@ -214,8 +223,11 @@ def interests():
             else:
                 print("Caracteres invalidos, o el interes ya se encuentra en su lista de intereses")
                 time.sleep(2)
+        elif len(intereses) == 0:
+            print("Al menos una cosa tenes que ingresar")
         else:
             otro_mas = False
+        
     return intereses
 
 
@@ -271,10 +283,10 @@ def busqueda(pseudonimo):       # ## devuelve los datos para hacer la busqueda e
     while edad_min > edad_max:
         print("Edad minima de busqueda")
         time.sleep(0.5)
-        edad_min = age(1)
+        edad_min = age("busqueda")
         print("Edad maxima de busqueda")
         time.sleep(0.5)
-        edad_max = age(1)
+        edad_max = age("busqueda")
         if edad_min > edad_max:
             print("Quizas pusiste las edades al reves...?")
     rango_distancia = float(input("Rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros, puede ser decimal\n>"))
@@ -314,6 +326,7 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      # muestra
     time.sleep(3)
     input("Presiona Enter para continuar")
     salir = False
+
     for match in dicc_matches:
         if not salir:
             lista_intereses_match = dicc_matches[match]["intereses"]
@@ -330,26 +343,24 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      # muestra
             apellido = dicc_matches[match]["apellido"]
             print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))
             time.sleep(1)
-            respuesta = input("like/hate ? TOM: no importa lo que pongas aca, siempre te va a dar invalido una vez, no se por que.\n>").lower   # si el usuario quiere dejar like, y mensaje
-            # ##por alguna razon la primera vez siempre entra al while, sin importar lo que pongas
+            respuesta = input("like/hate ? \n>").lower()   # si el usuario quiere dejar like, y mensaje
             time.sleep(0.5)
             while respuesta != "like" and respuesta != "hate":
                 respuesta = input("Respuesta no valida. Like/hate ?\n>").lower()
                 time.sleep(0.5)
             if respuesta == "like":
-                dicc_usuarios[match]["likes"].append("{}".format(pseudonimo))
+                dicc_usuarios[match]["likes"].append(pseudonimo)        #se registra en el diccionario del usuario match en la parte de likes, el pseudonimo del usuario actual, el que le dio like.
                 print("Le dejaste un like a {}".format(nombre))
                 time.sleep(0.5)
-                if dicc_usuarios[pseudonimo] in dicc_usuarios[match]["likes"]:
-                    respuesta = input("{} ya te habia dejado un like a vos. ¿Queres dejar un mensaje? s/n\n>".format(nombre)).lower
+                if match in dicc_usuarios[pseudonimo]["likes"]:     #se fija si el usuario match esta en la lista "likes" del usuario actual, es decir si match le dio like al usuario actual.
+                    respuesta = input("{} ya te habia dejado un like a vos. ¿Queres dejar un mensaje? s/n\n>".format(nombre)).lower()
                     if respuesta == "s" or respuesta == "si":
-                        print("Solo podes dejar un mensaje. Usalo bien.")
+                        print("Solo podes dejar un mensaje a la vez. Usalo bien.")
                         time.sleep(0.5)
                         mensaje = input("Escribi tu mensaje.\n>")
                         time.sleep(0.5)
-                        # dicc_usuarios[match]["mensajes"]{pseudonimo} = mensaje
-                        # print("Mensaje enviado.")
-                        print("El mensaje no se pudo enviar porque no hay internet.")
+                        dicc_usuarios[match]["mensajes"][pseudonimo] = mensaje
+                        print("Mensaje enviado.")
                         time.sleep(0.5)
             respuesta = input("Continuar? s/n\n>").lower()
             if respuesta == "n" or respuesta == "no":
@@ -394,7 +405,7 @@ while opcion_usuario == "0":       # ciclo que ejecuta la funcion adecuada segun
             time.sleep(2)
         opcion_usuario = "0"
     elif opcion_usuario == "2":
-        dicc_usuarios.update(registro(dicc_usuarios))
+        registro(dicc_usuarios)
         print("Usuario registrado con exito.")
         time.sleep(1)
         opcion_usuario = "0"
@@ -410,7 +421,7 @@ while opcion_usuario == "0":       # ciclo que ejecuta la funcion adecuada segun
                 elif respuesta != "n" and respuesta != "salir":
                     print("Tomo eso como un 'no'.")
                     time.sleep(1)
-                    respuesta = "salir"
+                    respuesta = "n"
                 if respuesta != "salir":
                     respuesta = input("Queres buscar tu alma gemela? s/n/salir\n>").lower()
                     if respuesta == "s":
