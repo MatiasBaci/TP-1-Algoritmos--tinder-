@@ -152,15 +152,13 @@ def age(instancia):      # instancia indica si se esta registrando o esta buscan
                 if caracter not in (*"0123456789",):
                     invalido = True
         if not invalido:
-            if int(edad) > 99 or int(edad) < 18:
-                invalido = True
-            elif 0 < int(edad) < 18:
-                if instancia == "busqueda":
-                    print("La policia ha sido notificada. Un patrullero esta en camino.")
-                else:
-                    print("Tenes que ser mayor de edad. No nos metas en problemas.")
-                invalido = True
-                time.sleep(2)
+            # if 0 < int(edad) < 18:
+            if instancia == "busqueda":
+                print("La policia ha sido notificada. Un patrullero esta en camino.")
+            else:
+                print("Tenes que ser mayor de edad. No nos metas en problemas.")
+            invalido = True
+            time.sleep(2)
         else:
             print("Edad invalida. Debe ser un numero entre 18 y 99.")
             time.sleep(2)
