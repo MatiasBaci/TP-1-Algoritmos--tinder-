@@ -151,8 +151,7 @@ def age(instancia):      # instancia indica si se esta registrando o esta buscan
             for caracter in edad:
                 if caracter not in (*"0123456789",):
                     invalido = True
-        if not invalido:
-            # if 0 < int(edad) < 18:
+        if not invalido and int(edad) < 18:
             if instancia == "busqueda":
                 if int(edad) < 3:
                     print("Quizas no quedo claro. Este servicio es para conocer gente, no para adoptar bebes.")
@@ -165,8 +164,9 @@ def age(instancia):      # instancia indica si se esta registrando o esta buscan
                     print("Tenes que ser mayor de edad. No nos metas en problemas.")
             invalido = True
             time.sleep(2)
-        else:
+        elif not invalido and int(edad) > 99:
             print("Edad invalida. Debe ser un numero entre 18 y 99.")
+            invalido = True
             time.sleep(2)
     return int(edad)
 
