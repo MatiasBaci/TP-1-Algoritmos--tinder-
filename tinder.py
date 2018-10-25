@@ -307,7 +307,7 @@ def find_match(dicc_usuarios, dicc_busqueda):       # ##le das el diccionario co
     if dicc_busqueda["pseudonimo"] in dicc_matches: # si el usuario que esta buscando ahora se encuentra en sus propios matches lo quita
         del dicc_matches[dicc_busqueda["pseudonimo"]]
     if dicc_matches == {}:
-        print("No hubo ningun match. Estas destinadx a morir solx :(")
+        print("No hubo ningun match. Estas destinadx a morir solx ಥ╭╮ಥ")
         time.sleep(2)
     return dicc_matches, dicc_busqueda
 
