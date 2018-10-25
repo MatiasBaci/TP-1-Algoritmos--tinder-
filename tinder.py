@@ -6,7 +6,7 @@ from datos_prueba import cargar_datos_prueba
 
 
 def menu_principal():
-    print("\n\nMENU PRINCIPAL\n")
+    print("\nMENU PRINCIPAL\n")
     print("1: Cargar conjunto prueba")
     print("2: Registrarse en el sistema")
     print("3: Ingresar al sistema")
@@ -14,13 +14,13 @@ def menu_principal():
     print("5: Salir")
     user_input = input("Elegi una de las opciones para proseguir\n>")  # guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
     while user_input not in (*"12345",):     # tupla conteniendo las opciones empaquetadas. verifica que el usuario no ingrese entradas no permitidas
-        print("\033[1;31;mFATAL ERROR!!!1!UNO\033[2;0;m\n")
-        time.sleep(1.5)
-        print("No, mentira.")
-        time.sleep(0.5)
         if user_input == "salir":
             user_input = "5"
         else:
+            print("\033[1;31;mFATAL ERROR!!!1!UNO\033[2;0;m\n")
+            time.sleep(1.5)
+            print("No, mentira.")
+            time.sleep(0.5)
             user_input = input("Entrada no válida. Elegi una de las opciones indicadas\n>")
     return user_input
 
@@ -337,7 +337,7 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      # muestra
             porcentaje = round(porcentaje)
             nombre = dicc_matches[match]["nombre"]
             apellido = dicc_matches[match]["apellido"]
-            print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))
+            print("Match!!! OwO \033[1;35;m\u2764\033[2;0;m {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))
             time.sleep(1)
             respuesta = input("like/hate ? \n>").lower()   # si el usuario quiere dejar like, y mensaje
             time.sleep(0.5)
@@ -346,7 +346,7 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      # muestra
                 time.sleep(0.5)
             if respuesta == "like":
                 dicc_usuarios[match]["likes"].append(pseudonimo)        #se registra en el diccionario del usuario match en la parte de likes, el pseudonimo del usuario actual, el que le dio like.
-                print("Le dejaste un like a {}".format(nombre))
+                print("Le dejaste un like a {} >3<".format(nombre))
                 time.sleep(0.5)
                 if match in dicc_usuarios[pseudonimo]["likes"]:     #se fija si el usuario match esta en la lista "likes" del usuario actual, es decir si match le dio like al usuario actual.
                     respuesta = input("{} ya te habia dejado un like a vos. ¿Queres dejar un mensaje? s/n\n>".format(nombre)).lower()
@@ -382,7 +382,7 @@ def ver_mensajes(pseudonimo, dicc_usuarios):
 # Bloque principal
 
 
-print("Bienvenide a la version python de tinder! >w< <3")
+print("Bienvenide a la version python de tinder! >w< \033[1;35;m\u2764\033[2;0;m")
 dicc_usuarios = {}           # aca van a ir todos los usuarios. los cargados y los nuevos
 # diccionario_usuarios_nuevos = {}    # aca solo van a estar los usuarios nuevos
 opcion_usuario = "0"
