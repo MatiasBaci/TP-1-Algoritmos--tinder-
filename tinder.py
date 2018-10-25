@@ -134,14 +134,15 @@ def age(n):
         if not invalido:
             if int(edad) > 99 or int(edad) < 18:
                 invalido = True
-        if invalido:
-            if 0 < int(edad) < 18:
+            elif 0 < int(edad) < 18:
                 if n == 1:
                     print("La policia ha sido notificada. Un patrullero esta en camino.")
                 else:
-                    print("Edad invalida. Debe ser un numero entre 18 y 99.")
-            else:
-                print("Edad invalida. Debe ser un numero entre 18 y 99.")
+                    print("Tenes que ser mayor de edad. No nos metas en problemas.")
+                invalido = True
+                time.sleep(2)
+        else:
+            print("Edad invalida. Debe ser un numero entre 18 y 99.")
             time.sleep(2)
     return int(edad)
 
