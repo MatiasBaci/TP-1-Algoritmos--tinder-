@@ -310,41 +310,46 @@ def porcentaje_match(dicc_matches, dicc_busqueda, dicc_usuarios):      #muestra 
     print("No, cuantificar la personalidad de alguien y reducirlo a un porcentaje no es absurdo.")
     time.sleep(3)
     input("Presiona Enter para continuar")
+    salir = False
     for match in dicc_matches:
-        lista_intereses_match = dicc_matches[match]["intereses"]
-        lista_intereses_usuario = dicc_usuarios[pseudonimo]["intereses"]
-        comun = 0
-        for interest in lista_intereses_usuario:      #se fija cuantos intereses del usuario estan en los intereses del match
-            if interest in lista_intereses_match:
-                comun += 1
-        #total = len(lista_intereses_match) + len(lista_intereses_usuario)
-        #porcentaje = 100 * 2 * comun / total       mas parecida a la consigna pero que funciona + o -
-        porcentaje = 100 * comun / len(lista_intereses_usuario)
-        porcentaje = round(porcentaje)
-        nombre = dicc_matches[match]["nombre"]
-        apellido = dicc_matches[match]["apellido"]
-        print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))
-        time.sleep(1)
-        respuesta = input("like/hate ?\n>").lower   #si el usuario quiere dejar like, y mensaje
-        ###por alguna razon la primera vez siempre entra al while, sin importar lo que pongas
-        time.sleep(1)
-        while respuesta != "like" and respuesta != "hate":
-            respuesta = input("Respuesta no valida. Like/hate ?\n>").lower()
+        if not salir:
+            lista_intereses_match = dicc_matches[match]["intereses"]
+            lista_intereses_usuario = dicc_usuarios[pseudonimo]["intereses"]
+            comun = 0
+            for interest in lista_intereses_usuario:      #se fija cuantos intereses del usuario estan en los intereses del match
+                if interest in lista_intereses_match:
+                    comun += 1
+            #total = len(lista_intereses_match) + len(lista_intereses_usuario)
+            #porcentaje = 100 * 2 * comun / total       mas parecida a la consigna pero que funciona + o -
+            porcentaje = 100 * comun / len(lista_intereses_usuario)
+            porcentaje = round(porcentaje)
+            nombre = dicc_matches[match]["nombre"]
+            apellido = dicc_matches[match]["apellido"]
+            print("Match!!! OwO <3 {} {} y vos tienen un {}% de intereses en comun.".format(nombre, apellido, porcentaje))
             time.sleep(1)
-        if respuesta == "like":
-            dicc_usuarios[match]["likes"].append("{}".format(pseudonimo))
-            print("Le dejaste un like a {}".format(nombre))
+            respuesta = input("like/hate ?\n>").lower   #si el usuario quiere dejar like, y mensaje
+            ###por alguna razon la primera vez siempre entra al while, sin importar lo que pongas
             time.sleep(1)
-            if dicc_usuarios[pseudonimo] in dicc_usuarios[match]["likes"]:
-                respuesta = input("{} ya te habia dejado un like a vos. ¿Queres dejar un mensaje? s/n\n>".format(nombre)).lower
-                if respuesta == "s" or respuesta == "si":
-                    print("Solo podes dejar un mensaje. Usalo bien.")
-                    time.sleep(1)
-                    mensaje = input("Escribi tu mensaje.\n>")
-                    #dicc_usuarios[match]["mensajes"]{pseudonimo} = mensaje
-                    #print("Mensaje enviado.")
-                    print("El mensaje no se pudo enviar porque no hay internet.")
-                    time.sleep(1)
+            while respuesta != "like" and respuesta != "hate":
+                respuesta = input("Respuesta no valida. Like/hate ?\n>").lower()
+                time.sleep(1)
+            if respuesta == "like":
+                dicc_usuarios[match]["likes"].append("{}".format(pseudonimo))
+                print("Le dejaste un like a {}".format(nombre))
+                time.sleep(1)
+                if dicc_usuarios[pseudonimo] in dicc_usuarios[match]["likes"]:
+                    respuesta = input("{} ya te habia dejado un like a vos. ¿Queres dejar un mensaje? s/n\n>".format(nombre)).lower
+                    if respuesta == "s" or respuesta == "si":
+                        print("Solo podes dejar un mensaje. Usalo bien.")
+                        time.sleep(1)
+                        mensaje = input("Escribi tu mensaje.\n>")
+                        #dicc_usuarios[match]["mensajes"]{pseudonimo} = mensaje
+                        #print("Mensaje enviado.")
+                        print("El mensaje no se pudo enviar porque no hay internet.")
+                        time.sleep(1)
+            respuesta = input("Continuar? s/n\n>").lower()
+            if respuesta == "n" or respuesta == "no":
+                salir = True
 
 
 def ver_mensajes(pseudonimo, dicc_usuarios):
