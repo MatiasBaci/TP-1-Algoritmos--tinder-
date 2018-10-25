@@ -14,10 +14,10 @@ def menu_principal():
     print("5: Salir")
     user_input = input("Elegi una de las opciones para proseguir\n>")  # guarda la respuesta del usuario en esa variable y la usamos para decidir que hacer
     while user_input not in (*"12345",):     # tupla conteniendo las opciones empaquetadas. verifica que el usuario no ingrese entradas no permitidas
-        print("\033[1;31;40m FATAL ERROR!!1!\033[1;32;41m\n")
-        # time.sleep(1)
-        # print("No, mentira.")
-        # time.sleep(1)
+        print("\033[1;31;mFATAL ERROR!!!1!UNO\033[2;0;m\n")
+        time.sleep(1.5)
+        print("No, mentira.")
+        time.sleep(0.5)
         if user_input == "salir":
             user_input = "5"
         else:
@@ -179,7 +179,7 @@ def location():
     while not lat_valido:
         try:
             latitud = float(input("Ingrese su latitud\n>").replace(",", "."))
-        except (TypeError,ValueError):
+        except (TypeError, ValueError):
             print("Oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
             time.sleep(2)
         else:
@@ -191,7 +191,7 @@ def location():
     while not lon_valido:
         try:
             longitud = float(input("Ingrese su longitud\n>"))
-        except (TypeError,ValueError):
+        except (TypeError, ValueError):
             print("Oopsie whoopsie no ingresaste un número. Por favor ingresa un número UwU")
             time.sleep(2)
         else:
