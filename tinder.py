@@ -31,8 +31,8 @@ def registro(diccionario_usuarios):
     apellido = input("Ingresa tu apellido\n>")
     pseudonimo = nuevo_pseudonimo(diccionario_usuarios)
     contraseña = password()
-    sexo = sex()
-    edad = age(0)
+    sexo = sex_registro()
+    edad = age("registro")
     ubicacion = location()
     intereses = interests()
     likes = []
@@ -99,12 +99,12 @@ def password():                     ###perdon si es confuso, ni yo la entiendo
     return santo_y_seña
 
 
-def sex():      ###permitir que busque varios sexos
+def sex_registro():
     sexo_valido = False
     ##salir = False
     caracteres_permitidos = ("h", "m", "i", "hombre", "mujer", "indefinido")
     while not sexo_valido: ##or not salir:
-        sexo = input("Ingrese sexo\n'h' hombre\n'm' mujer\n'i' indefinido\n>").lower()      #'s' salir
+        sexo = input("Ingresa tu sexo\n'h' hombre\n'm' mujer\n'i' indefinido\n>").lower()      #'s' salir
         if sexo in caracteres_permitidos:
             sexo_valido = True
         else:
@@ -120,7 +120,28 @@ def sex():      ###permitir que busque varios sexos
     return sexo
 
 
-def age(n):
+def sex_busqueda():
+    sexo_valido = False
+    caracteres_permitidos = ("h", "m", "i")
+    while not sexo_valido:
+        lista_sexos = []
+        sexo = input("Ingresa sexo(s)\n'h' hombre\n'm' mujer\n'i' indefinido\n>").lower()
+        sexo_valido = True
+        for caracter in sexo:
+            if caracter not in caracteres_permitidos or caracter in lista_sexos:
+                sexo_valido = False
+                print("Invalido")
+                time.sleep(1)
+            elif caracter == "h":
+                lista_sexos.append("hombre")
+            elif caracter == "m":
+                lista_sexos.append("mujer")
+            else:
+                lista_sexos.append("indefinido")
+    return lista_sexos
+
+
+def age(instancia):      #instancia indica si se esta registrando o esta buscando un match
     invalido = True
     while invalido:
         invalido = False
@@ -135,7 +156,7 @@ def age(n):
             if int(edad) > 99 or int(edad) < 18:
                 invalido = True
             elif 0 < int(edad) < 18:
-                if n == 1:
+                if instancia == "busqueda":
                     print("La policia ha sido notificada. Un patrullero esta en camino.")
                 else:
                     print("Tenes que ser mayor de edad. No nos metas en problemas.")
@@ -238,11 +259,10 @@ def ingresar(dicc):
 
 
 def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en un diccionario
-    print("Sexo en el que esta interesade\n")
+    print("Sexo(s) en el que esta interesade\nEjemplo: 'mh' busca mujer y hombre.")
     time.sleep(1)
-    sexo_buscar = sex()
+    lista_sexos = sex_busqueda()
     time.sleep(1)
-    #rango_edad = age()
     edad_min = 1
     edad_max = 0
     while edad_min > edad_max:
@@ -255,7 +275,7 @@ def busqueda(pseudonimo):       ### devuelve los datos para hacer la busqueda en
         if edad_min > edad_max:
             print("Quizas pusiste las edades al reves...?")
     rango_distancia = float(input("Rango de busqueda\nIngrese el rango máximo de busqueda en kilómetros, puede ser decimal\n>"))
-    dicc_busqueda = {"pseudonimo": pseudonimo, "sexo_buscar": sexo_buscar, "rango_edad": (edad_min, edad_max), "rango_distancia": rango_distancia}
+    dicc_busqueda = {"pseudonimo": pseudonimo, "sexo_buscar": lista_sexos, "rango_edad": (edad_min, edad_max), "rango_distancia": rango_distancia}
     return dicc_busqueda
 
 
@@ -263,14 +283,15 @@ def find_match(dicc_usuarios, dicc_busqueda):       ###le das el diccionario con
         #dicc_usuarios es el diccionario con todos los usuarios
         #dicc_busqueda tiene el pseudonimo del usuario actual y sus parametros de busqueda
     dicc_matches = {}
-    for usuario in dicc_usuarios:           #por cada usuario en el diccionario se fija si hacen match. si hay, mete a ese usuario y sus datos (values) en otro diccionario 'dicc_matches'
-        edad_min = dicc_busqueda["rango_edad"][0]
-        edad_max = dicc_busqueda["rango_edad"][1]
-        sexo_interesado = dicc_busqueda["sexo_buscar"]
-        distancia_al_usuario = geodesic(dicc_usuarios[usuario]["ubicacion"], dicc_usuarios[dicc_busqueda["pseudonimo"]]["ubicacion"]).kilometers
-        if (edad_min <= dicc_usuarios[usuario]["edad"] <= edad_max) and (dicc_usuarios[usuario]["sexo"] == sexo_interesado) and (distancia_al_usuario <= dicc_busqueda["rango_distancia"]):
-            datos = dicc_usuarios[usuario]
-            dicc_matches.update({usuario: datos})
+    for cada_sexo in dicc_busqueda["sexo_buscar"]:
+        for usuario in dicc_usuarios:           #por cada usuario en el diccionario se fija si hacen match. si hay, mete a ese usuario y sus datos (values) en otro diccionario 'dicc_matches'
+            edad_min = dicc_busqueda["rango_edad"][0]
+            edad_max = dicc_busqueda["rango_edad"][1]
+            sexo_interesado = dicc_busqueda["sexo_buscar"][cada_sexo]
+            distancia_al_usuario = geodesic(dicc_usuarios[usuario]["ubicacion"], dicc_usuarios[dicc_busqueda["pseudonimo"]]["ubicacion"]).kilometers
+            if (edad_min <= dicc_usuarios[usuario]["edad"] <= edad_max) and (dicc_usuarios[usuario]["sexo"] == sexo_interesado) and (distancia_al_usuario <= dicc_busqueda["rango_distancia"]):
+                datos = dicc_usuarios[usuario]
+                dicc_matches.update({usuario: datos})
     if dicc_busqueda["pseudonimo"] in dicc_matches: #si el usuario que esta buscando ahora se encuentra en sus propios matches lo quita
         del dicc_matches[dicc_busqueda["pseudonimo"]]
     if dicc_matches == {}:
