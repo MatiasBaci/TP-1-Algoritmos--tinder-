@@ -157,7 +157,7 @@ def age(instancia):      # instancia indica si se esta registrando o esta buscan
             if 18 <= edad <= 99:
                 edad_valida = True
             elif 0 < edad < 18:
-                print("Tiene que ser mayor de edad. No nos metas en problemas.")
+                print("La policia ha sido notificada. Un patrullero esta en camino.")
             elif edad > 99:
                 print("OwO what's this? (muy viejo para tinder)")
             else:
@@ -173,9 +173,6 @@ def age(instancia):      # instancia indica si se esta registrando o esta buscan
                 print("Edad invalida. Debe ser un numero entre 18 y 99.")
     time.sleep(0.5)
     return edad
-
-                    ###print("Quizas no quedo claro. Este servicio es para conocer gente, no para adoptar bebes.")
-                    ###print("La policia ha sido notificada. Un patrullero esta en camino.")
 
 
 def location():
