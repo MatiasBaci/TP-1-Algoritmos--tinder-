@@ -19,18 +19,18 @@
 #   buenos-aires.
 
 def cargar_datos_prueba():
-    juan_perez = ["1235JoJo", "Juan", "Perez", "hombre", 34, (1, 2), ["hax", "sushi", "roirros", "troirros"]]
-    giorno_giovanna = ["contraseña", "Giorno", "Giovanna", "hombre", 18, (0, 0), ["hax", "helado", "italia", "taxis", "robar", "oro", "animales", "plantas"]]
-    jotaro_kujo = ["contraseña", "Jotaro", "Kujo", "hombre", 28, (0, 0), ["hax", "delfines", "fumar", "poker"]]
-    lisa_lisa = ["contraseña", "Lisa", "Lisa", "mujer", 36, (0, 0), ["hax", "baño-de-inmersion", "bufandas", "lentes"]]
-    suzi_q = ["contraseña", "Suzi", "Q", "mujer", 50, (0, 0), ["hax", "fotografia", "japon", "bromas"]]
-    joseph_joestar = ["contraseña", "Joseph", "Joestar", "hombre", 50, (50, 10), ["hax", "disfraces", "armas", "nueva-york"]]
-    dio_brando = ["contraseña", "Dio", "Brando", "hombre", 99, (0, 0), ["hax", "sangre", "poder", "gatos", "relojes", "cuchillos"]]
-    erina_obacha = ["contraseña", "Erina", "Pendleton", "mujer", 18, (10, 6), ["hax", "medicina", "barro"]]
-    jane_doe = ["contraseña", "Jane", "Doe", "mujer", 25, (0, 0), ["hax", "asado", "musica", "green-day", "star-wars"]]
-    john_doe = ["contraseña", "John", "Doe", "hombre", 25, (0, 0), ["hax", "bicicleta", "taekwondo", "buenos-aires", "basquet"]]
-    kakyoin = ["contraseña", "Noriaki", "Kakyoin", "hombre", 18, (89, 1), ["hax", "chupetines", "cerezas", "esmeraldas", "verde", "lentes"]]
-    von_stroheim = ["contraseña", "Rudol", "Von Stroheim", "hombre", 27, (0, 0), ["hax", "SS", "alemania", "mechs"]]
+    juan_perez = {"contraseña": "contraseña", "nombre": "Juan", "apellido": "Perez", "sexo": "hombre", "edad": 34, "ubicacion": (1, 2), "intereses": ["hax", "sushi", "roirros", "troirros"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
+    giorno_giovanna = {"contraseña": "contraseña", "nombre": "Giorno", "apellido": "Giovanna", "sexo": "hombre", "edad": 18, "ubicacion": (0, 0), "intereses": ["hax", "helado", "italia", "taxis", "robar", "oro", "animales", "plantas"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
+    jotaro_kujo = {"contraseña": "contraseña", "nombre": "Jotaro", "apellido": "Kujo", "sexo": "hombre", "edad": 28, "ubicacion": (0, 0), "intereses": ["hax", "delfines", "fumar", "poker"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
+    lisa_lisa = {"contraseña": "contraseña", "nombre": "Lisa", "apellido": "Lisa", "sexo": "mujer", "edad": 36, "ubicacion": (0, 0), "intereses": ["hax", "baño-de-inmersion", "bufandas", "lentes"], "likes": ["ciroluiro", "dio_brando", "matiasbaci"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY", "matiasbaci": "pito culo caca pedo"}}
+    suzi_q = {"contraseña": "contraseña", "nombre": "Suzi", "apellido": "Q", "sexo": "mujer", "edad": 50, "ubicacion": (0, 0), "intereses": ["hax", "fotografia", "japon", "bromas"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
+    joseph_joestar = {"contraseña": "contraseña", "nombre": "Joseph", "apellido": "Joestar", "sexo": "hombre", "edad": 50, "ubicacion": (50, 10), "intereses": ["hax", "disfraces", "armas", "nueva-york"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
+    dio_brando = {"contraseña": "contraseña", "nombre": "Dio", "apellido": "Brando", "sexo": "hombre", "edad": 99, "ubicacion": (0, 0), "intereses":["hax", "sangre", "poder", "gatos", "relojes", "cuchillos"], "likes": ["ciroluiro", "matiasbaci", "lisa_lisa"], "mensajes": {"ciroluiro": "nuinos", "matiasbaci": "pito culo caca pedo pis"}}
+    erina_obacha = {"contraseña": "contraseña", "nombre": "Erina", "apellido": "Pendleton", "sexo": "mujer", "edad": 18, "ubicacion":  (10, 6), "intereses": ["hax", "medicina", "barro"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
+    jane_doe = {"contraseña": "contraseña", "nombre": "Jane", "apellido": "Doe", "sexo": "mujer", "edad": 25, "ubicacion": (0, 0), "intereses": ["hax", "asado", "musica", "green-day", "star-wars"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
+    john_doe = {"contraseña": "contraseña", "nombre": "John", "apellido": "Doe", "sexo": "hombre", "edad": 25, "ubicacion": (0, 0), "intereses": ["hax", "bicicleta", "taekwondo", "buenos-aires", "basquet"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
+    kakyoin = {"contraseña": "contraseña", "nombre": "Noriaki", "apellido": "Kakyoin", "sexo": "hombre", "edad": 18, "ubicacion": (89, 1), "intereses": ["hax", "chupetines", "cerezas", "esmeraldas", "verde", "lentes"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
+    von_stroheim = {"contraseña": "contraseña", "nombre": "Rudol", "apellido": "Von Stroheim", "sexo": "hombre", "edad": 27, "ubicacion": (0, 0), "intereses": ["hax", "SS", "alemania", "mechs"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
     diccionario = {"juan_perez": juan_perez, "giorno_giovanna": giorno_giovanna, "jotaro_kujo": jotaro_kujo, "lisa_lisa": lisa_lisa, "suzi_q": suzi_q, "joseph_joestar": joseph_joestar, "dio_brando": dio_brando, "erina_obacha": erina_obacha, "jane_doe": jane_doe, "john_doe": john_doe, "kakyoin": kakyoin, "von_stroheim": von_stroheim}
     return diccionario
 
@@ -38,4 +38,4 @@ def cargar_datos_prueba():
 #if __name__ == "__main__":
 #    usuarios = cargar_datos_prueba()
 #    for pseudonimo in usuarios:
-#        print("{pseudonimo}\n{} {} {} {} {} {} {}".format(usuarios[pseudonimo][0],usuarios[pseudonimo][1],usuarios[pseudonimo][2],usuarios[pseudonimo][3],usuarios[pseudonimo][4],usuarios[pseudonimo][5],usuarios[pseudonimo][6]) )
+#        print("{pseudonimo}\n{} {} {} {} {} {} {}".format(usuarios[pseudonimo][contraseña],usuarios[pseudonimo][nombre],usuarios[pseudonimo][apellido],usuarios[pseudonimo][sexo],usuarios[pseudonimo][edad],usuarios[pseudonimo][ubicacion],usuarios[pseudonimo][intereses]) )
