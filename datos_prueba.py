@@ -35,7 +35,8 @@ def cargar_datos_prueba():
     return diccionario
 
 
-#if __name__ == "__main__":
-#    usuarios = cargar_datos_prueba()
-#    for pseudonimo in usuarios:
-#        print("{pseudonimo}\n{} {} {} {} {} {} {}".format(usuarios[pseudonimo][contraseña],usuarios[pseudonimo][nombre],usuarios[pseudonimo][apellido],usuarios[pseudonimo][sexo],usuarios[pseudonimo][edad],usuarios[pseudonimo][ubicacion],usuarios[pseudonimo][intereses]) )
+if __name__ == "__main__":      #sirve para ver los datos del diccionario en forma entendible. Solo corre si se ejecuta el codigo
+    usuarios = cargar_datos_prueba()
+    for pseudonimo in usuarios:
+        print("{}\n{} {} {} {} {} {} {}".format(pseudonimo,usuarios[pseudonimo]["contraseña"],usuarios[pseudonimo]["nombre"],usuarios[pseudonimo]["apellido"],usuarios[pseudonimo]["sexo"],usuarios[pseudonimo]["edad"],usuarios[pseudonimo]["ubicacion"],usuarios[pseudonimo]["intereses"],usuarios[pseudonimo]["likes"],usuarios[pseudonimo]["mensajes"]) )
+    input("press enter")

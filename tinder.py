@@ -393,6 +393,7 @@ opcion_usuario = "0"
 datos_ya_cargados = False
 while opcion_usuario == "0":       # ciclo que ejecuta la funcion adecuada segun la opcion elegida
     opcion_usuario = menu_principal()
+
     if opcion_usuario == "1":       # carga los datos del otro archivo si es que no se hizo antes
         if not datos_ya_cargados:
             dicc_usuarios_prueba = cargar_datos_prueba()
@@ -404,11 +405,13 @@ while opcion_usuario == "0":       # ciclo que ejecuta la funcion adecuada segun
             print("No se cargaron datos porque ya habian sido cargados.")
             time.sleep(2)
         opcion_usuario = "0"
+
     elif opcion_usuario == "2":
         registro(dicc_usuarios)
         print("Usuario registrado con exito.")
         time.sleep(1)
         opcion_usuario = "0"
+
     elif opcion_usuario == "3":
         pseudonimo_ingresado, valido = ingresar(dicc_usuarios)
         if valido:
@@ -436,10 +439,12 @@ while opcion_usuario == "0":       # ciclo que ejecuta la funcion adecuada segun
                         time.sleep(1)
                         respuesta = "salir"
         opcion_usuario = "0"
+
     elif opcion_usuario == "4":
         print("Editar? No hay presupuesto para tantas funcionalidades.")
         time.sleep(3)
         opcion_usuario = "0"
+        
     elif opcion_usuario == "5":     # ##pongo elif por las dudas, cambiar luego de testear mucho
         print("Chau hermosx <3")
         time.sleep(3)
