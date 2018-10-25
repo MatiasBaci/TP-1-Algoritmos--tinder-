@@ -154,9 +154,15 @@ def age(instancia):      # instancia indica si se esta registrando o esta buscan
         if not invalido:
             # if 0 < int(edad) < 18:
             if instancia == "busqueda":
-                print("La policia ha sido notificada. Un patrullero esta en camino.")
+                if int(edad) < 3:
+                    print("Quizas no quedo claro. Este servicio es para conocer gente, no para adoptar bebes.")
+                else:
+                    print("La policia ha sido notificada. Un patrullero esta en camino.")
             else:
-                print("Tenes que ser mayor de edad. No nos metas en problemas.")
+                if int(edad) == 0:
+                    print("¿No naciste? No estarias usando el programa entonces.")
+                else:
+                    print("Tenes que ser mayor de edad. No nos metas en problemas.")
             invalido = True
             time.sleep(2)
         else:
