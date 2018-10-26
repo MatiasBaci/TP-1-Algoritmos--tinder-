@@ -18,7 +18,7 @@
 #   green-day, star-wars, nueva-york, fotografia, francia, asado, bicicleta, taekwondo,
 #   buenos-aires.
 
-def cargar_datos_prueba():
+def cargar_datos_prueba():  #carga un diccionario que adentro tiene un diccionario para cada usuario. En la lista de intereses, hicimos que todos tuvieran "hax", de esta forma se puede obtener match con todos simplemente poniendo como interes "hax" al registrarse
     juan_perez = {"contraseña": "contraseña", "nombre": "Juan", "apellido": "Perez", "sexo": "hombre", "edad": 34, "ubicacion": (1, 2), "intereses": ["hax", "sushi", "roirros", "troirros"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
     giorno_giovanna = {"contraseña": "contraseña", "nombre": "Giorno", "apellido": "Giovanna", "sexo": "hombre", "edad": 18, "ubicacion": (0, 0), "intereses": ["hax", "helado", "italia", "taxis", "robar", "oro", "animales", "plantas"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
     jotaro_kujo = {"contraseña": "contraseña", "nombre": "Jotaro", "apellido": "Kujo", "sexo": "hombre", "edad": 28, "ubicacion": (0, 0), "intereses": ["hax", "delfines", "fumar", "poker"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
@@ -31,7 +31,8 @@ def cargar_datos_prueba():
     john_doe = {"contraseña": "contraseña", "nombre": "John", "apellido": "Doe", "sexo": "hombre", "edad": 25, "ubicacion": (0, 0), "intereses": ["hax", "bicicleta", "taekwondo", "buenos-aires", "basquet"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
     kakyoin = {"contraseña": "contraseña", "nombre": "Noriaki", "apellido": "Kakyoin", "sexo": "hombre", "edad": 18, "ubicacion": (89, 1), "intereses": ["hax", "chupetines", "cerezas", "esmeraldas", "verde", "lentes"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
     von_stroheim = {"contraseña": "contraseña", "nombre": "Rudol", "apellido": "Von Stroheim", "sexo": "hombre", "edad": 27, "ubicacion": (0, 0), "intereses": ["hax", "SS", "alemania", "mechs"], "likes": ["ciroluiro", "dio_brando"], "mensajes": {"ciroluiro": "nuinos", "dio_brando": "WRYYYYYYY"}}
-    diccionario = {"juan_perez": juan_perez, "giorno_giovanna": giorno_giovanna, "jotaro_kujo": jotaro_kujo, "lisa_lisa": lisa_lisa, "suzi_q": suzi_q, "joseph_joestar": joseph_joestar, "dio_brando": dio_brando, "erina_obacha": erina_obacha, "jane_doe": jane_doe, "john_doe": john_doe, "kakyoin": kakyoin, "von_stroheim": von_stroheim}
+    kaine = {"contraseña": "contraseña", "nombre": "Kainé", "apellido": "", "sexo": "indefinido", "edad": 20, "ubicacion": (10, 0), "intereses": ["hax", "ropa-reveladora", "espadas", "trabalenguas"], "likes": ["ciroluiro"], "mensajes": {"ciroluiro": "nuinos"}}
+    diccionario = {"juan_perez": juan_perez, "giorno_giovanna": giorno_giovanna, "jotaro_kujo": jotaro_kujo, "lisa_lisa": lisa_lisa, "suzi_q": suzi_q, "joseph_joestar": joseph_joestar, "dio_brando": dio_brando, "erina_obacha": erina_obacha, "jane_doe": jane_doe, "john_doe": john_doe, "kakyoin": kakyoin, "von_stroheim": von_stroheim, "kaine": kaine}
     return diccionario
 
 
