@@ -434,3 +434,4 @@ while opcion_usuario == "0":       # ciclo que ejecuta la funcion adecuada segun
         time.sleep(1.5)
         exit()
 
+# pito culo caca pedo
